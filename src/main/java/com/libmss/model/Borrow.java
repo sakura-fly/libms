@@ -72,7 +72,7 @@ public class Borrow {
 
     @Override
     public String toString() {
-        return "Borrow{" +
+        return "BorrowDao{" +
                 "uid=" + uid +
                 ", type=" + type +
                 ", bid=" + bid +

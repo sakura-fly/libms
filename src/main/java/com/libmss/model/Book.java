@@ -1,16 +1,16 @@
 package com.libmss.model;
 
-public class book {
+public class Book {
     private String name;
     private double price;
     private String author;
     private String publisher;
     private String edition;
 
-    public book() {
+    public Book() {
     }
 
-    public book(String name, double price, String author, String publisher, String edition) {
+    public Book(String name, double price, String author, String publisher, String edition) {
         this.name = name;
         this.price = price;
         this.author = author;
@@ -60,7 +60,7 @@ public class book {
 
     @Override
     public String toString() {
-        return "book{" +
+        return "BookDao{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
                 ", author='" + author + '\'' +

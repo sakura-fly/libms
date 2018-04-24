@@ -60,7 +60,7 @@ public class Periodical {
 
     @Override
     public String toString() {
-        return "Periodical{" +
+        return "PeriodicalDao{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
                 ", author='" + author + '\'' +

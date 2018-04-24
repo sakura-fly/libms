@@ -62,7 +62,7 @@ public class News {
 
     @Override
     public String toString() {
-        return "News{" +
+        return "NewsDao{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +

@@ -2,16 +2,16 @@ package com.libmss.model;
 
 import java.util.Date;
 
-public class admin {
+public class Admin {
     private  String uname;
     private String pwd;
     private Date ctime;
     private String phone;
 
-    public admin() {
+    public Admin() {
     }
 
-    public admin(String uname, String pwd, Date ctime, String phone) {
+    public Admin(String uname, String pwd, Date ctime, String phone) {
         this.uname = uname;
         this.pwd = pwd;
         this.ctime = ctime;
@@ -52,7 +52,7 @@ public class admin {
 
     @Override
     public String toString() {
-        return "admin{" +
+        return "Admin{" +
                 "uname='" + uname + '\'' +
                 ", pwd='" + pwd + '\'' +
                 ", ctime=" + ctime +
