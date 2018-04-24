@@ -1,0 +1,51 @@
+{
+  "code":0,
+  "msg":"ok",
+  "count":6,
+  "data":[
+    {
+      "name":"格言",
+      "publisher":"黑龙江省出版",
+      "num":10,
+      "edition":"2018年3月上"
+
+
+    },{
+      "name":"格言",
+      "publisher":"黑龙江省出版",
+      "num":10,
+      "edition":"2018年3月上"
+
+
+    },{
+      "name":"格言",
+      "publisher":"黑龙江省出版",
+      "num":10,
+      "edition":"2018年3月上"
+
+
+    },{
+      "name":"格言",
+      "publisher":"黑龙江省出版",
+      "num":10,
+      "edition":"2018年3月上"
+
+
+    },{
+      "name":"格言",
+      "publisher":"黑龙江省出版",
+      "num":10,
+      "edition":"2018年3月上"
+
+
+    },{
+      "name":"格言",
+      "publisher":"黑龙江省出版",
+      "num":10,
+      "edition":"2018年3月上"
+
+
+    }
+
+  ]
+}

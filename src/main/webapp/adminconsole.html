@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>二期图书馆管理系统</title>
+<!--     <script type="text/javascript" src="/libms/lib/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/libms/lib/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/libms/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/libms/lib/layui/css/layui.css">
+    <script type="text/javascript" src="/libms/lib/layui/layui.js"></script>
+    <script type="text/javascript" src="/libms/app/js/admin.js" ></script> -->
+    <script type="text/javascript" src="lib/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/layui/css/layui.css">
+    <script type="text/javascript" src="lib/layui/layui.js"></script>
+    <script type="text/javascript" src="app/js/admin.js" ></script>
+    <script type="text/javascript" src="lib/js/jquery.table2excel.js"></script>
+    <script type="text/javascript" src="lib/js/jquery.data2excel.js"></script>
+</head>
+<body class="layui-layout-body">
+
+
+<div id="bookmsg" hidden>
+    <div class="form msgly" >
+        <input class="bookinput form-control" type="text" name="" id="" placeholder="书名"><br>
+        <input class="bookinput form-control" type="text" name="" id="" placeholder="作者"><br>
+        <input class="bookinput form-control" type="text" name="" id="" placeholder="出版社"><br>
+        <input class="bookinput form-control" type="text" name="" id="" placeholder="版次"><br>
+        <input class="bookinput form-control" type="text" name="" id="" placeholder="数量"><br>
+    </div>
+</div>
+
+
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">系统管理</div>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <!--<img src="http://t.cn/RCzsdCq" class="layui-nav-img">-->
+                    高月泉
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                    <dd><a href="">退出</a></dd>
+                </dl>
+            </li>
+            <!--<li class="layui-nav-item"><a href="">退了</a></li>-->
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">系统管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" id="qk">期刊资料</a></dd>
+                        <dd><a href="javascript:;" id="books">书籍资料</a></dd>
+                        <dd><a href="javascript:;" id="user">读者资料</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">统计分析</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" id="qkfx">期刊资料分析</a></dd>
+                        <dd><a href="javascript:;" id="booksfx">书籍资料分析</a></dd>
+                        <dd><a href="javascript:;" id="userfx">读者资料分析</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">系统设置</a>
+                    <dl class="layui-nav-child">
+                        <!-- <dd><a href="javascript:;" id="">读者类型</a></dd> -->
+                        <dd><a href="javascript:;" id="booktype">图书类型</a></dd>
+                        <dd><a href="javascript:;" id="publisheradmin">出版社</a></dd>
+                        <dd><a href="javascript:;" id="">预约天数</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">系统管理</a>
+                    <dl class="layui-nav-child">
+                        <!-- <dd><a href="javascript:;" id="">读者类型</a></dd> -->
+                        <dd><a href="javascript:;" id="statmentam">报表管理</a></dd>
+                        <dd><a href="javascript:;" id="newsadmin">新闻管理</a></dd>
+                        <dd><a href="javascript:;" id="">维护管理</a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body" id="ucontent">
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        <!--© layui.com - 底部固定区域-->
+        二七图书馆
+    </div>
+</div>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+</body>
+</html>

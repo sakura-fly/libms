@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>报表</title>
+	<!--<script type="text/javascript" src="lib/js/jquery-3.2.1.min.js"></script>-->
+    <!--<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>-->
+    <!--<link rel="stylesheet" href="lib/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="lib/layui/css/layui.css">-->
+    <!--<link rel="stylesheet" href="app/css/tablegroup.css">-->
+    <!--<script type="text/javascript" src="lib/js/jquery.data2excel.js"></script>-->
+    <!--<script type="text/javascript" src="lib/layui/layui.js"></script>-->
+ </head>
+<body>
+	<div class="container">
+		<div class="tgroup">
+			<form class="layui-form" action="">
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label" style="padding-left: 0px;">开始日期</label>
+						<div class="layui-input-inline">
+							<input type="text" name="startdate" id="startdate" lay-verify="startdate" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label" style="padding-left: 0px;">结束日期</label>
+						<div class="layui-input-inline">
+							<input type="text" name="enddate" id="enddate" lay-verify="enddate" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<button class="layui-btn layui-btn-normal">查询</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<button class="layui-btn layui-btn-normal" id="exportexcel">导出excel</button>
+	    <table class="layui-table" id="statementb" lay-filter="statementb">
+
+   		</table>			
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	var tableData = {};
+	layui.use(['form', 'layedit', 'laydate','table'], function(){
+		laydate = layui.laydate;
+		var table = layui.table;
+        table.render({
+            elem: '#statementb',
+            url:'statement.json',
+            cols: [[
+                {field:'name',  title: '书名'},
+                {field:'time',  title: '添加时间', },
+                {field:'num',  title: '总量', },
+                {field:'borrownum',  title: '借阅次数', },
+                {field:'price',  title: '单价', },
+            ]],
+            done: function(res, curr, count){
+			    tableData = res;
+			}
+
+
+        });
+		laydate.render({
+			elem: '#startdate'
+		});
+		laydate.render({
+			elem: '#enddate'
+		});
+	})
+	// 导出excel
+	$("#exportexcel").click(function(event) {
+		$.data2excel({
+        name: $("#startdate").val() + "至" + $('#enddate').val() + "借阅报表",
+        filename:$("#startdate").val() + "至" + $('#enddate').val() + "借阅报表",
+        content:tableData.data,
+        title:[
+            "书名","添加时间",'总量','借阅次数','单价'
+        ],
+        fileds:["name", "time",'num','borrownum','price'],
+    })
+	});
+
+</script>
