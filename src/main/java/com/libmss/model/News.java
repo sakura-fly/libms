@@ -8,16 +8,18 @@ public class News {
     private String content;
     private Date op;
     private Date ed;
+    private Date time;
 
     public News() {
     }
 
-    public News(int id, String title, String content, Date op, Date ed) {
+    public News(int id, String title, String content, Date op, Date ed, Date time) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.op = op;
         this.ed = ed;
+        this.time = time;
     }
 
     public int getId() {
@@ -58,6 +60,14 @@ public class News {
 
     public void setEd(Date ed) {
         this.ed = ed;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     @Override

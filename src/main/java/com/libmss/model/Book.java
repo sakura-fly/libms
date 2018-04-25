@@ -6,17 +6,20 @@ public class Book {
     private String author;
     private String publisher;
     private String edition;
+    private int num;
 
     public Book() {
     }
 
-    public Book(String name, double price, String author, String publisher, String edition) {
+    public Book(String name, double price, String author, String publisher, String edition, int num) {
         this.name = name;
         this.price = price;
         this.author = author;
         this.publisher = publisher;
         this.edition = edition;
+        this.num = num;
     }
+
 
     public String getName() {
         return name;

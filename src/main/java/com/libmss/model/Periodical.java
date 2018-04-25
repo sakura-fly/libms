@@ -6,17 +6,20 @@ public class Periodical {
     private String author;
     private String publisher;
     private String edition;
+    private int num;
 
-    public Periodical() {
-    }
-
-    public Periodical(String name, double price, String author, String publisher, String edition) {
+    public Periodical(String name, double price, String author, String publisher, String edition, int num) {
         this.name = name;
         this.price = price;
         this.author = author;
         this.publisher = publisher;
         this.edition = edition;
+        this.num = num;
     }
+
+    public Periodical() {
+    }
+
 
     public String getName() {
         return name;
