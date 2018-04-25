@@ -10,6 +10,10 @@
 
     </mvc:annotation-driven>
 
+    <bean
+            class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+
+
     <context:component-scan base-package="com.libmss.controller"/>
 
     <mvc:resources location="/img/" mapping="/img/**"/>

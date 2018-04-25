@@ -2,6 +2,7 @@ package com.libmss.dao.impl;
 
 import com.libmss.dao.NewsDao;
 import com.libmss.model.News;
+import com.libmss.model.PageModel;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,7 +20,7 @@ public class NewsDaoImpl implements NewsDao {
     }
 
     @Override
-    public List<News> lsit(int page, int limit, News news) {
+    public List<News> lsit(PageModel pageModel, News news) {
         List<News> l = new ArrayList<>();
 
 

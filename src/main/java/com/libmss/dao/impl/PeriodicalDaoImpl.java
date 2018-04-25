@@ -1,6 +1,7 @@
 package com.libmss.dao.impl;
 
 import com.libmss.dao.PeriodicalDao;
+import com.libmss.model.PageModel;
 import com.libmss.model.Periodical;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class PeriodicalDaoImpl implements PeriodicalDao {
     }
 
     @Override
-    public ArrayList<Periodical> list(int page, int limit, Periodical periodical) {
+    public ArrayList<Periodical> list(PageModel pageModel, Periodical periodical) {
 
         ArrayList<Periodical> l = new ArrayList<>();
         // String name, double price, String author, String publisher, String edition

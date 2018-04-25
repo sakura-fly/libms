@@ -1,6 +1,7 @@
 package com.libmss.dao.impl;
 
 import com.libmss.dao.UserDao;
+import com.libmss.model.PageModel;
 import com.libmss.model.User;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> list(int page, int limit, User user) {
+    public List<User> list(PageModel pageModel, User user) {
         List<User> l = new ArrayList<>();
         // tring uname, String pwd, Date ctime, String phone
         l.add(new User("zry","周蓉渊",new Date(),"18888888888"));

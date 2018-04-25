@@ -2,6 +2,7 @@ package com.libmss.dao.impl;
 
 import com.libmss.dao.BorrowDao;
 import com.libmss.model.Borrow;
+import com.libmss.model.PageModel;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,7 +21,7 @@ public class BorrowDaoImpl implements BorrowDao {
     }
 
     @Override
-    public List<Borrow> list(int page, int limit, Borrow borrow) {
+    public List<Borrow> list(PageModel pageModel, Borrow borrow) {
         List<Borrow> l = new ArrayList<>();
 
         l.add(new Borrow(1,1,1,new Date(),new Date(),1));
