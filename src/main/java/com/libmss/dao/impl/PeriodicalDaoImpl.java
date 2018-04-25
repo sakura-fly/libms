@@ -25,12 +25,12 @@ public class PeriodicalDaoImpl implements PeriodicalDao {
 
         ArrayList<Periodical> l = new ArrayList<>();
         // String name, double price, String author, String publisher, String edition
-        l.add(new Periodical("格言",5,"","黑龙江出版社","2第五期",23));
-        l.add(new Periodical("格言",5,"","黑龙江出版社","2第五期",23));
-        l.add(new Periodical("格言",5,"","黑龙江出版社","2第五期",23));
-        l.add(new Periodical("格言",5,"","黑龙江出版社","2第五期",23));
-        l.add(new Periodical("格言",5,"","黑龙江出版社","2第五期",23));
-        l.add(new Periodical("格言",5,"","黑龙江出版社","2第五期",23));
+        l.add(new Periodical("格言",5,"","黑龙江出版社","第五期",23));
+        l.add(new Periodical("格言",5,"","黑龙江出版社","第五期",23));
+        l.add(new Periodical("格言",5,"","黑龙江出版社","第五期",23));
+        l.add(new Periodical("格言",5,"","黑龙江出版社","第五期",23));
+        l.add(new Periodical("格言",5,"","黑龙江出版社","第五期",23));
+        l.add(new Periodical("格言",5,"","黑龙江出版社","第五期",23));
 
         return l;
     }
