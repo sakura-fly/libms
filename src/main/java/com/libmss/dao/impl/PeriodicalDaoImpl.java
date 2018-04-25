@@ -3,8 +3,11 @@ package com.libmss.dao.impl;
 import com.libmss.dao.PeriodicalDao;
 import com.libmss.model.PageModel;
 import com.libmss.model.Periodical;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+
+@Component
 
 public class PeriodicalDaoImpl implements PeriodicalDao {
     @Override

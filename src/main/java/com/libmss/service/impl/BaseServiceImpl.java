@@ -12,14 +12,15 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
     BaseDao<T> dao;
 
-    public BaseServiceImpl() {
-    }
-
     public BaseServiceImpl(BaseDao<T> dao) {
         this.dao = dao;
     }
 
-    protected abstract void setDao() ;
+
+
+    public void setDao(BaseDao<T> dao) {
+        this.dao = dao;
+    }
 
     @Override
     public ResponseModel<T> add(T t) {

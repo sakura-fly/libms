@@ -3,10 +3,12 @@ package com.libmss.dao.impl;
 import com.libmss.dao.BookDao;
 import com.libmss.model.Book;
 import com.libmss.model.PageModel;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class BookDaoImpl implements BookDao {
     @Override
     public int add(Book book) {

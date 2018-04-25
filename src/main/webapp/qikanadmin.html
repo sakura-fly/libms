@@ -60,7 +60,8 @@
             var table = layui.table;
             table.render({
                 elem: '#qktb',
-                url:'qikanlist.json',
+                url:'periodical/list',
+                method:"post",
                 page:true,
                 cols: [[
                     {field:'name',  title: '名称'},

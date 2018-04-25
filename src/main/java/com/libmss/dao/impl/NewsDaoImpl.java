@@ -3,11 +3,12 @@ package com.libmss.dao.impl;
 import com.libmss.dao.NewsDao;
 import com.libmss.model.News;
 import com.libmss.model.PageModel;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@Component
 public class NewsDaoImpl implements NewsDao {
     @Override
     public int add(News news) {

@@ -13,8 +13,11 @@
     <bean
             class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
+    
 
     <context:component-scan base-package="com.libmss.controller"/>
+    <context:component-scan base-package="com.libmss.dao"/>
+    <context:component-scan base-package="com.libmss.service"/>
 
     <mvc:resources location="/img/" mapping="/img/**"/>
     <!--<mvc:resources location="/upfile/" mapping="/upfile/**" />-->

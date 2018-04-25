@@ -3,11 +3,13 @@ package com.libmss.dao.impl;
 import com.libmss.dao.UserDao;
 import com.libmss.model.PageModel;
 import com.libmss.model.User;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class UserDaoImpl implements UserDao {
     @Override
     public int add(User user) {
