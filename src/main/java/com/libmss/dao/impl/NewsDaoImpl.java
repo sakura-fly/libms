@@ -20,7 +20,7 @@ public class NewsDaoImpl implements NewsDao {
     }
 
     @Override
-    public List<News> lsit(PageModel pageModel, News news) {
+    public List<News> list(PageModel pageModel, News news) {
         List<News> l = new ArrayList<>();
 
 
@@ -34,6 +34,7 @@ public class NewsDaoImpl implements NewsDao {
 
         return l;
     }
+
 
     @Override
     public long count(News news) {

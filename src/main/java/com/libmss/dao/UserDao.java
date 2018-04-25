@@ -8,9 +8,5 @@ import java.util.List;
 
 @Component
 
-public interface UserDao {
-    public int add (User user);
-    public int update(User user);
-    public List<User> list (PageModel pageModel, User user);
-    public long count(User user);
+public interface UserDao extends BaseDao<User>{
 }

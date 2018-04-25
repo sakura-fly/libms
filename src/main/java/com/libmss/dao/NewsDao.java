@@ -8,9 +8,6 @@ import java.util.List;
 
 @Component
 
-public interface NewsDao {
-    public int add(News news);
-    public int update(News news);
-    public List<News> lsit(PageModel pageModel, News news);
-    public long count(News news);
+public interface NewsDao extends BaseDao<News>{
+
 }

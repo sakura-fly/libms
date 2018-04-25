@@ -8,9 +8,5 @@ import java.util.ArrayList;
 
 @Component
 
-public interface PeriodicalDao {
-    public int add(Periodical periodical);
-    public int update(Periodical periodical);
-    public ArrayList<Periodical> list(PageModel pageModel, Periodical periodical);
-    public long count(Periodical periodical);
+public interface PeriodicalDao extends BaseDao<Periodical>{
 }
