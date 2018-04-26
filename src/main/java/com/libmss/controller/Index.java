@@ -14,7 +14,7 @@ public class Index {
 
     @RequestMapping("/test")
     public void test(PrintWriter out){
-        User u = new User("666","233",new Date(),"123");
+        User u = new User("666","233","",new Date(),"123");
         JSONObject o = JSONObject.fromObject(u);
         out.print(o.toString());
 //        sys

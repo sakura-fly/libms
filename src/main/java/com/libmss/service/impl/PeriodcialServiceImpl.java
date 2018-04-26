@@ -12,7 +12,7 @@ import javax.jnlp.PersistenceService;
 public class PeriodcialServiceImpl extends BaseServiceImpl<Periodical>  implements PeriodicalService {
 
 
-    public PeriodcialServiceImpl(BaseDao<Periodical> baseDao) {
-        super(baseDao);
+    public PeriodcialServiceImpl(PeriodicalDao periodicalDao) {
+        super(periodicalDao);
     }
 }

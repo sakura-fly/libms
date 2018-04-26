@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class BookServiceImpl extends BaseServiceImpl<Book> implements BookService  {
 
 
-    public BookServiceImpl(BaseDao<Book> baseDao) {
-        super(baseDao);
+    public BookServiceImpl(BookDao bookDao) {
+        super(bookDao);
     }
 }

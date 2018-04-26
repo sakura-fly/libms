@@ -18,10 +18,6 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
 
 
 
-    public void setDao(BaseDao<T> dao) {
-        this.dao = dao;
-    }
-
     @Override
     public ResponseModel<T> add(T t) {
         int stat = dao.add(t);
@@ -43,10 +39,10 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     @Override
     public ResponseModel<T> list(PageModel page, T t) {
         ResponseModel<T> rm = new ResponseModel<T>();
-        List<T> lsit = dao.list(page, t);
-        rm.setMsg(lsit.isEmpty() ? StringValue.LIST_FAILD : "");
-        rm.setCode(lsit.isEmpty() ? -1 : 0);
-        rm.setData(lsit);
+        List<T> list = dao.list(page, t);
+        rm.setMsg(list == null || list.isEmpty() ? StringValue.LIST_FAILD : "");
+        rm.setCode(list == null || list.isEmpty() ? -1 : 0);
+        rm.setData(list);
         rm.setCount(dao.count(t));
         return rm;
     }

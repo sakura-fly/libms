@@ -45,7 +45,8 @@
             var table = layui.table;
             table.render({
                 elem: '#usertb',
-                url:'userlist.json',
+                url:'user/list',
+                method:"post",
                 page:true,
                 cols: [[
                     {field:'uname',  title: '用户名'},

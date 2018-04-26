@@ -10,10 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class NewsServiceImpl extends BaseServiceImpl<News> implements NewsService {
 
-    @Autowired
-    NewsDao newsDao;
 
-    public NewsServiceImpl(BaseDao<News> baseDao) {
-        super(baseDao);
+    public NewsServiceImpl(NewsDao newsDao) {
+        super(newsDao);
     }
 }
