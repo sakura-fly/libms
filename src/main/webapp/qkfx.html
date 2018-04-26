@@ -14,167 +14,142 @@
 
 </head>
 <body>
-    <div class="container">
-        <form class="layui-form" action="">
-            <div class="layui-form-item">
-                <label class="layui-form-label" style="width: 90px;">分析类型</label>
-                <div class="layui-input-block">
-                    <input type="radio" name="type" value="1" title="出版社" lay-filter="switchTest" checked>
-                    <input type="radio" name="type" value="2" title="类型" lay-filter="switchTest">
-                    <input type="radio" name="type" value="3" title="名称" lay-filter="switchTest">
-                </div>
+<div class="container">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 90px;">分析类型</label>
+            <div class="layui-input-block">
+                <input type="radio" name="type" value="1" title="出版社" lay-filter="switchTest" checked>
+                <input type="radio" name="type" value="2" title="类型" lay-filter="switchTest">
+                <input type="radio" name="type" value="3" title="名称" lay-filter="switchTest">
             </div>
-        </form>
-        <button class="btn btn-default" id="exportexcel">导出excel</button>
-        <button class="btn btn-primary" id="zhutu">显示柱状图</button>
-        <button class="btn btn-info" id="zhexiantu">显示折线图</button>
-        <button class="btn btn-success" id="bingyu">显示饼状图</button>
-        <table class="layui-table" id="qkfxt" lay-filter="qkfxt">
+        </div>
+    </form>
+    <button class="btn btn-default" id="exportexcel">导出excel</button>
+    <button class="btn btn-primary" id="zhutu">显示柱状图</button>
+    <button class="btn btn-info" id="zhexiantu">显示折线图</button>
+    <button class="btn btn-success" id="bingyu">显示饼状图</button>
+    <table class="layui-table" id="qkfxt" lay-filter="qkfxt">
 
-        </table>
+    </table>
 
-       
+
     <div id="hc"></div>
-    </div>
-    
+</div>
+
 </body>
 </html>
 <script>
     var table;
-    layui.use('form', function(){
+    var tableData;
+    var titles = [];
+    var zbz = [];
+    var zbdata = []
+
+    titles[1] = "出版社";
+    titles[2] = "作者";
+    titles[3] = "类型";
+    var etitle;
+    layui.use(['table', 'form'], function () {
+        var fxtype = $("input[name='type']:checked").val();
         var form = layui.form;
+        etitle = [titles[fxtype], "数量"];
         form.render();
-        form.on('radio()', function(data){
-            console.log(data.elem); //得到radio原始DOM对象
-            console.log(data.value); //被点击的radio的value值
+        form.on('radio()', function (data) {
+            fxtype = data.value;
+            etitle = [titles[fxtype], "数量"];
+            table.reload("bookfxt", {
+                where: {
+                    type: fxtype
+                }
+            })
         });
-    });
-    layui.use('table', function() {
+
+
         table = layui.table;
         table.render({
             elem: '#qkfxt',
-            url:'qkfx.json',
-            // id:"qkfxtb",
+            url: 'analyze/borrow',
+            method: "post",
             cols: [[
-                {field:'publisher',  title: '出版社'},
-                {field:'num',  title: '借阅次数', },
-            ]]
+                {field: 'publisher', title:etitle[0]},
+                {field: 'num', title: '借阅次数',},
+            ]],
+            done: function (res, curr, count) {
+                tableData = res;
+                for (var i in res.data) {
+                    zbz.push(res.data[i].type);
+                    zbdata.push(res.data[i].num);
+                }
+            }
 
 
         });
     });
-$("#exportexcel").click(function(event) {
-    console.log(table.cache.qkfxt);
-    $.data2excel({
-        name: "期刊资料分析",
-        filename:"期刊资料分析",
-        content:[
-             {
-                  "publisher":"黑龙江省出版",
-                  "num":10
+    $("#exportexcel").click(function (event) {
+        console.log(table.cache.qkfxt);
+        $.data2excel({
+            name: "期刊资料分析",
+            filename: "期刊资料分析",
+            content: tableData.data,
+            title: etitle,
+            fileds: ["type", "num"],
+        })
+    });
+    $("#zhutu").click(function (event) {
+        createch('column')
+    });
+    $("#zhexiantu").click(function (event) {
+        createch('line')
+    });
 
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }
-        ],
-        title:[
-            "出版社","数量"
-        ],
-        fileds:["publisher", "num"],
-    })
-});
-$("#zhutu").click(function(event) {
-    createch ('column')
-});
-$("#zhexiantu").click(function(event) {
-     createch ('line')
-});
-function createch (type) {
-var chart = Highcharts.chart('hc', {
-    chart: {
-        type: type
-        // type: 'line'
-        // type: 'pie'
-    },
-    title: {
-        text: '出版社统计情况'
-    },
-    subtitle: {
-        // text: '数据来源：thesolarfoundation.com'
-    },
-    yAxis: {
-        title: {
-            text: '期刊数量'
-        }
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-    xAxis: {
-            categories: ['黑龙江出版社', '机械工业出版社', '电子工业出版社', '清华大学出版社', '长江出版社'],
-            tickLength:10
-        },
-    series: [{
-        name: '期刊数量',
-        data: [11744, 17722, 16005, 19771, 20185]
-    }],
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
+    function createch(type) {
+        var chart = Highcharts.chart('hc', {
+            chart: {
+                type: type
+                // type: 'line'
+                // type: 'pie'
             },
-            chartOptions: {
-                legend: {
-                    layout: 'horizontal',
-                    align: 'center',
-                    verticalAlign: 'bottom'
+            title: {
+                text: etitle[0] + '统计情况'
+            },
+            subtitle: {
+                // text: '数据来源：thesolarfoundation.com'
+            },
+            yAxis: {
+                title: {
+                    text: '期刊数量'
                 }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+            xAxis: {
+                categories: ['黑龙江出版社', '机械工业出版社', '电子工业出版社', '清华大学出版社', '长江出版社'],
+                tickLength: 10
+            },
+            series: [{
+                name: '期刊数量',
+                data: [11744, 17722, 16005, 19771, 20185]
+            }],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
             }
-        }]
+        });
     }
-});
-}
 
 
 </script>

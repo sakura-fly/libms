@@ -51,11 +51,11 @@
     layui.use(['table', 'form'], function () {
         var fxtype = $("input[name='type']:checked").val();
         var form = layui.form;
-        etitle = [titles[fxtype],"数量"];
+        etitle = [titles[fxtype], "数量"];
         form.render();
         form.on('radio()', function (data) {
             fxtype = data.value;
-            etitle = [titles[fxtype],"数量"];
+            etitle = [titles[fxtype], "数量"];
             table.reload("bookfxt", {
                 where: {
                     type: fxtype
@@ -78,17 +78,17 @@
             },
             cols: [[
                 {field: 'type', title: etitle[0]},
-                {field: 'num', title: '借阅次数',},
+                {field: 'num', title: '借阅次数'}
             ]],
             done: function (res, curr, count) {
                 tableData = res;
-                console.log(tableData)
+                console.log(tableData);
+                zbz = [];
+                zbdata = [];
                 for (var i in res.data) {
                     zbz.push(res.data[i].type);
                     zbdata.push(res.data[i].num);
                 }
-                console.log(zbz);
-                console.log(zbdata);
             }
 
         });
