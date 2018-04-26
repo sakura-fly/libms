@@ -36,155 +36,114 @@
 </body>
 </html>
 
-    <script>
-        var table;
-        var tableData;
+<script>
+    var table;
+    var tableData;
+    var titles = [];
 
-        layui.use(['table','form'], function() {
-            var fxtype = $("input[name='type']:checked").val();
-            var form = layui.form;
-            form.render();
-            form.on('radio()', function(data){
-                // console.log(data.elem); //得到radio原始DOM对象
-                // console.log(data.value); //被点击的radio的value值
-                fxtype =data.value;
-                table.reload("bookfxt",{
-                    where:{
-                        type:fxtype
-                    }
-                })
-            });
+    titles[1] = "出版社";
+    titles[2] = "作者";
+    titles[3] = "类型";
+    var etitle;
 
-
-
-            table = layui.table;
-            table.render({
-                elem: '#bookfxt',
-                url:'analyze/borrow',
-                method:"post",
-                where:{
-                  type:fxtype
-                },
-                cols: [[
-                    {field:'type',  title: '出版社'},
-                    {field:'num',  title: '借阅次数', },
-                ]],
-                done: function(res, curr, count){
-                    tableData = res;
+    layui.use(['table', 'form'], function () {
+        var fxtype = $("input[name='type']:checked").val();
+        var form = layui.form;
+        etitle = [titles[fxtype],"数量"];
+        form.render();
+        form.on('radio()', function (data) {
+            // console.log(data.elem); //得到radio原始DOM对象
+            // console.log(data.value); //被点击的radio的value值
+            fxtype = data.value;
+            etitle = [titles[fxtype],"数量"];
+            table.reload("bookfxt", {
+                where: {
+                    type: fxtype
                 }
-
-            });
+            })
         });
 
-$("#exportexcel").click(function(event) {
-    $.data2excel({
-        name: "书籍资料分析",
-        filename:"书籍资料分析",
-        content:[
-             {
-                  "publisher":"黑龙江省出版",
-                  "num":10
 
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }, {
-                  "publisher":"黑龙江省出版",
-                  "num":10
-
-
-                }
-        ],
-        title:[
-            "出版社","数量"
-        ],
-        fileds:["publisher", "num"],
-    })
-});
-$("#zhutu").click(function(event) {
-    createch ('column')
-});
-$("#zhexiantu").click(function(event) {
-     createch ('line')
-});
-function createch (type) {
-var chart = Highcharts.chart('hc', {
-    chart: {
-        type: type
-        // type: 'line'
-        // type: 'pie'
-    },
-    title: {
-        text: '出版社统计情况'
-    },
-    subtitle: {
-        // text: '数据来源：thesolarfoundation.com'
-    },
-    yAxis: {
-        title: {
-            text: '期刊数量'
-        }
-    },
-    legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'middle'
-    },
-    xAxis: {
-            categories: ['黑龙江出版社', '机械工业出版社', '电子工业出版社', '清华大学出版社', '长江出版社'],
-            tickLength:10
-        },
-    series: [{
-        name: '期刊数量',
-        data: [11744, 17722, 16005, 19771, 20185]
-    }],
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
+        table = layui.table;
+        table.render({
+            elem: '#bookfxt',
+            url: 'analyze/borrow',
+            method: "post",
+            where: {
+                type: fxtype
             },
-            chartOptions: {
-                legend: {
-                    layout: 'horizontal',
-                    align: 'center',
-                    verticalAlign: 'bottom'
-                }
+            cols: [[
+                {field: 'type', title: '出版社'},
+                {field: 'num', title: '借阅次数',},
+            ]],
+            done: function (res, curr, count) {
+                tableData = res;
             }
-        }]
+
+        });
+    });
+
+    $("#exportexcel").click(function (event) {
+        $.data2excel({
+            name: "书籍资料分析",
+            filename: "书籍资料分析",
+            content: tableData.data,
+            title: etitle,
+            fileds: ["type", "num"],
+        })
+    });
+    $("#zhutu").click(function (event) {
+        createch('column')
+    });
+    $("#zhexiantu").click(function (event) {
+        createch('line')
+    });
+
+    function createch(type) {
+        var chart = Highcharts.chart('hc', {
+            chart: {
+                type: type
+                // type: 'line'
+                // type: 'pie'
+            },
+            title: {
+                text: etitle[0] + '统计情况'
+            },
+            subtitle: {
+                // text: '数据来源：thesolarfoundation.com'
+            },
+            yAxis: {
+                title: {
+                    text: '期刊数量'
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle'
+            },
+            xAxis: {
+                categories: ['黑龙江出版社', '机械工业出版社', '电子工业出版社', '清华大学出版社', '长江出版社'],
+                tickLength: 10
+            },
+            series: [{
+                name: '期刊数量',
+                data: [11744, 17722, 16005, 19771, 20185]
+            }],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        }
+                    }
+                }]
+            }
+        });
     }
-});
-}
-    </script>
+</script>
