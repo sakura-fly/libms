@@ -25,14 +25,14 @@ public class UserDaoImpl implements UserDao {
     public List<User> list(PageModel pageModel, User user) {
         List<User> l = new ArrayList<>();
         // tring uname, String pwd, Date ctime, String phone
-        l.add(new User("zry","周蓉渊",new Date(),"18888888888"));
-        l.add(new User("zry","周蓉渊",new Date(),"18888888888"));
-        l.add(new User("zry","周蓉渊",new Date(),"18888888888"));
-        l.add(new User("zry","周蓉渊",new Date(),"18888888888"));
-        l.add(new User("zry","周蓉渊",new Date(),"18888888888"));
-        l.add(new User("zry","周蓉渊",new Date(),"18888888888"));
+        l.add(new User("zry","周蓉渊","",new Date(),"18888888888"));
+        l.add(new User("zry","周蓉渊","",new Date(),"18888888888"));
+        l.add(new User("zry","周蓉渊","",new Date(),"18888888888"));
+        l.add(new User("zry","周蓉渊","",new Date(),"18888888888"));
+        l.add(new User("zry","周蓉渊","",new Date(),"18888888888"));
+        l.add(new User("zry","周蓉渊","",new Date(),"18888888888"));
 
-        return null;
+        return l;
     }
 
     @Override
