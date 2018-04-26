@@ -50,9 +50,13 @@
             table = layui.table;
             table.render({
                 elem: '#bookfxt',
-                url:'qkfx.json',
+                url:'analyze/borrow',
+                method:"post",
+                where:{
+                  type:1
+                },
                 cols: [[
-                    {field:'publisher',  title: '出版社'},
+                    {field:'type',  title: '出版社'},
                     {field:'num',  title: '借阅次数', },
                 ]]
 

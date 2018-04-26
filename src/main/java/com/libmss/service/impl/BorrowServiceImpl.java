@@ -11,10 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class BorrowServiceImpl extends BaseServiceImpl<Borrow> implements BorrowService {
 
-    @Autowired
-    BorrowDao borrowDao;
 
-    public BorrowServiceImpl(BaseDao<Borrow> baseDao) {
-        super(baseDao);
+    public BorrowServiceImpl(BorrowDao borrowDao) {
+        super(borrowDao);
     }
 }
