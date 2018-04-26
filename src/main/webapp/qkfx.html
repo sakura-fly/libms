@@ -58,10 +58,14 @@
         form.on('radio()', function (data) {
             fxtype = data.value;
             etitle = [titles[fxtype], "数量"];
-            table.reload("bookfxt", {
+            table.reload("qkfxt", {
                 where: {
                     type: fxtype
-                }
+                },
+                cols: [[
+                    {field: 'type', title: etitle[0]},
+                    {field: 'num', title: '借阅次数'}
+                ]]
             })
         });
 
@@ -72,11 +76,16 @@
             url: 'analyze/borrow',
             method: "post",
             cols: [[
-                {field: 'publisher', title:etitle[0]},
+                {field: 'type', title: etitle[0]},
                 {field: 'num', title: '借阅次数',},
             ]],
+            where: {
+                type: fxtype
+            },
             done: function (res, curr, count) {
                 tableData = res;
+                zbz = [];
+                zbdata = [];
                 for (var i in res.data) {
                     zbz.push(res.data[i].type);
                     zbdata.push(res.data[i].num);
@@ -87,7 +96,6 @@
         });
     });
     $("#exportexcel").click(function (event) {
-        console.log(table.cache.qkfxt);
         $.data2excel({
             name: "期刊资料分析",
             filename: "期刊资料分析",
@@ -127,12 +135,12 @@
                 verticalAlign: 'middle'
             },
             xAxis: {
-                categories: ['黑龙江出版社', '机械工业出版社', '电子工业出版社', '清华大学出版社', '长江出版社'],
+                categories: zbz,
                 tickLength: 10
             },
             series: [{
                 name: '期刊数量',
-                data: [11744, 17722, 16005, 19771, 20185]
+                data: zbdata
             }],
             responsive: {
                 rules: [{

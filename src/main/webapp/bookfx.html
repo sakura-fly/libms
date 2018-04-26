@@ -49,6 +49,7 @@
     var etitle;
 
     layui.use(['table', 'form'], function () {
+        table = layui.table;
         var fxtype = $("input[name='type']:checked").val();
         var form = layui.form;
         etitle = [titles[fxtype], "数量"];
@@ -68,7 +69,7 @@
         });
 
 
-        table = layui.table;
+
         table.render({
             elem: '#bookfxt',
             url: 'analyze/borrow',
@@ -82,7 +83,6 @@
             ]],
             done: function (res, curr, count) {
                 tableData = res;
-                console.log(tableData);
                 zbz = [];
                 zbdata = [];
                 for (var i in res.data) {
