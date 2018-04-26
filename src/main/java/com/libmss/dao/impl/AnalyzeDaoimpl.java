@@ -42,7 +42,7 @@ public class AnalyzeDaoimpl<T> implements AnalyzeDao<T> {
         ns.add("意林");
         ns.add("计算机工程与设计");
         tm.put(IntValue.AUTH,as);
-        tm.put(IntValue.TYPE,ps);
+        tm.put(IntValue.TYPE,ts);
         tm.put(IntValue.PUBRISHER,ps);
         tm.put(IntValue.NAME,ns);
     }
