@@ -10,7 +10,7 @@
     <!--<link rel="stylesheet" href="/libms/lib/layui/css/layui.css">-->
     <!--<link rel="stylesheet" href="/libms/lib/css/bootstrap.min.css">-->
 
-    <script type="text/javascript" src="lib/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="../lib/highcharts/highcharts.js"></script>
 
 </head>
 <body>
@@ -73,7 +73,7 @@
         table = layui.table;
         table.render({
             elem: '#qkfxt',
-            url: 'analyze/borrow',
+            url: '/libms/analyze/borrow',
             method: "post",
             cols: [[
                 {field: 'type', title: etitle[0]},
