@@ -51,7 +51,11 @@
                 cols: [[
                     {field:'uname',  title: '用户名'},
                     {field:'name',  title: '姓名'},
-                    {field:'ctime',  title: '创建时间'},
+                    {field:'ctime',  title: '创建时间',templet:function (d) {
+                        var ctime = new Date(d.ctime)
+                        return ctime.getFullYear() + "年" + (ctime.getMonth() + 1) + "月" + ctime.getDate() + "日 " + ctime.getHours() + "点" + ctime.getMinutes() + "分" + ctime.getSeconds() + "秒";;
+
+                        }},
                     {field:'phone',  title: '电话'},
                     {fixed: 'right', width:200, align:'center', toolbar: '#barDemo',  title: '操作'}
                 ]]
