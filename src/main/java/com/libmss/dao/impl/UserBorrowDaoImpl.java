@@ -29,7 +29,7 @@ public class UserBorrowDaoImpl implements UserBorrowDao {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             l.add(new UserBorrow("恋练有词",sdf.parse("2018-04-26"),sdf.parse("2018-05-26"),sdf.parse("2018-04-16")));
-            l.add(new UserBorrow("恋练有词",sdf.parse("2018-04-26"),sdf.parse("2018-05-26"),null));
+            l.add(new UserBorrow("恋练有词",sdf.parse("2018-04-26"),sdf.parse("2018-04-27"),null));
             l.add(new UserBorrow("恋练有词",sdf.parse("2018-04-26"),sdf.parse("2018-05-26"),sdf.parse("2018-04-16")));
             l.add(new UserBorrow("恋练有词",sdf.parse("2018-04-26"),sdf.parse("2018-05-26"),null));
             l.add(new UserBorrow("恋练有词",sdf.parse("2018-04-26"),sdf.parse("2018-05-26"),sdf.parse("2018-04-16")));

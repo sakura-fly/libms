@@ -17,7 +17,7 @@ public class UserBorrowController {
     @Autowired
     UserBorrowServiceImpl userBorrowService;
 
-    @RequestMapping(value = "list", method = RequestMethod.POST)
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
     public ResponseModel<UserBorrow> list(PageModel page, UserBorrow borrow){
         return userBorrowService.list(page,borrow);

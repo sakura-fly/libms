@@ -12,35 +12,35 @@
 <body>
 <div class="container">
     <table class="layui-table" id="bookfxt" lay-filter="bookfxt">
-
+<span style="color: #ff0000;"></span>
     </table>
 </div>
 </body>
 </html>
 <script type="application/javascript">
     layui.use(["table"], function () {
-        var table = layui.table();
+        var table = layui.table
         userid = 1;
         table.render({
             elem: '#bookfxt',
-            url: '/libms/analyze/borrow',
+            url: '/libms/ub/list',
             method: "post",
             where: {
                 userid: userid
             },
             cols: [[
-                {field: 'type', title: "书籍名称"},
+                {field: 'bookName', title: "书籍名称"},
                 {
                     field: 'type', title: "借阅时间", templet: function (d) {
-                        var ctime = new Date(d.btime)
-                        return ctime.getFullYear() + "年" + (ctime.getMonth() + 1) + "月" + ctime.getDate() + "日 " ;
+                        var ctime = new Date(d.bTime);
+                        return ctime.getFullYear() + "年" + (ctime.getMonth() + 1) + "月" + ctime.getDate() + "日 ";
 
 
                     }
                 },
                 {
                     field: 'type', title: "预计归还时间", templet: function (d) {
-                        var ctime = new Date(d.btime)
+                        var ctime = new Date(d.rTime)
                         return ctime.getFullYear() + "年" + (ctime.getMonth() + 1) + "月" + ctime.getDate() + "日 ";
 
 
@@ -49,8 +49,8 @@
                 {
                     field: 'type', title: "实际归还时间", templet: function (d) {
                         if (d.rtime) {
-                            var ctime = new Date(d.rrtime)
-                            return ctime.getFullYear() + "年" + (ctime.getMonth() + 1) + "月" + ctime.getDate() + "日 " ;
+                            var ctime = new Date(d.rrTime)
+                            return ctime.getFullYear() + "年" + (ctime.getMonth() + 1) + "月" + ctime.getDate() + "日 ";
 
                         } else {
                             return "尚未归还"
@@ -59,11 +59,14 @@
 
                     }
                 },
-                {field: 'type', title: "距离归还剩余时间", templet: function (d) {
-                        var btime = d.btime.getTime();
+                {
+                    field: 'type', title: "距离归还剩余时间", templet: function (d) {
+                        var btime = d.rTime;
                         var time = new Date().getTime();
-                        return (time - btime) / 1000 / 60 / 60 / 24  + "天";
-                    }},
+                        var t = (btime - time) / 1000 / 60 / 60 / 24 ;
+                        return (t > 0 ? "剩余" +  t  : "<span style=\"color: #ff0000;\">超出" + (-t) + "</span>") + "天";
+                    }
+                }
                 // {field: 'num', title: '借阅次数'}
             ]],
             done: function (res, curr, count) {
