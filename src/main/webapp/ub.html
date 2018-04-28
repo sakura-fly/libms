@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>借阅情况</title>
+    <script type="text/javascript" src="lib/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/layui/css/layui.css">
+    <script type="text/javascript" src="lib/layui/layui.js"></script>
+</head>
+<body>
+<div class="container">
+    <table class="layui-table" id="bookfxt" lay-filter="bookfxt">
+
+    </table>
+</div>
+</body>
+</html>
+<script type="application/javascript">
+    layui.use(["table"], function () {
+        var table = layui.table();
+        userid = 1;
+        table.render({
+            elem: '#bookfxt',
+            url: '/libms/analyze/borrow',
+            method: "post",
+            where: {
+                userid: userid
+            },
+            cols: [[
+                {field: 'type', title: "书籍名称"},
+                {
+                    field: 'type', title: "借阅时间", templet: function (d) {
+                        var ctime = new Date(d.btime)
+                        return ctime.getFullYear() + "年" + (ctime.getMonth() + 1) + "月" + ctime.getDate() + "日 " ;
+
+
+                    }
+                },
+                {
+                    field: 'type', title: "预计归还时间", templet: function (d) {
+                        var ctime = new Date(d.btime)
+                        return ctime.getFullYear() + "年" + (ctime.getMonth() + 1) + "月" + ctime.getDate() + "日 ";
+
+
+                    }
+                },
+                {
+                    field: 'type', title: "实际归还时间", templet: function (d) {
+                        if (d.rtime) {
+                            var ctime = new Date(d.rrtime)
+                            return ctime.getFullYear() + "年" + (ctime.getMonth() + 1) + "月" + ctime.getDate() + "日 " ;
+
+                        } else {
+                            return "尚未归还"
+                        }
+
+
+                    }
+                },
+                {field: 'type', title: "距离归还剩余时间", templet: function (d) {
+                        var btime = d.btime.getTime();
+                        var time = new Date().getTime();
+                        return (time - btime) / 1000 / 60 / 60 / 24  + "天";
+                    }},
+                // {field: 'num', title: '借阅次数'}
+            ]],
+            done: function (res, curr, count) {
+                // tableData = res;
+                // zbz = [];
+                // zbdata = [];
+                // for (var i in res.data) {
+                //     zbz.push(res.data[i].type);
+                //     zbdata.push(res.data[i].num);
+                // }
+            }
+
+        });
+
+    })
+</script>
