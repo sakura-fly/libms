@@ -63,8 +63,8 @@
                     field: 'type', title: "距离归还剩余时间", templet: function (d) {
                         var btime = d.rTime;
                         var time = new Date().getTime();
-                        var t = (btime - time) / 1000 / 60 / 60 / 24 ;
-                        return (t > 0 ? "剩余" +  t  : "<span style=\"color: #ff0000;\">超出" + (-t) + "</span>") + "天";
+                        var t = Math.ceil((btime - time) / 1000 / 60 / 60 / 24) ;
+                        return (t > 0 ? "剩余" +  t + "天"  : "<span style=\"color: #ff0000;\">超出" + (-t) + "天</span>") ;
                     }
                 }
                 // {field: 'num', title: '借阅次数'}

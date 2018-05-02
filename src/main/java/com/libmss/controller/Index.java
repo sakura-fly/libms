@@ -11,6 +11,11 @@ import java.util.Date;
 @Controller
 public class Index {
 
+    @RequestMapping("/")
+    public String index(){
+        return "redirect:admin/adminconsole.html";
+    }
+
 
     @RequestMapping("/test")
     public void test(PrintWriter out){
