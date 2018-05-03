@@ -19,10 +19,10 @@
     <context:component-scan base-package="com.libmss.dao"/>
     <context:component-scan base-package="com.libmss.service"/>
 
-    <mvc:resources location="/img/" mapping="/img/**"/>
+    <!--<mvc:resources location="/img/" mapping="/img/**"/>-->
     <!--<mvc:resources location="/upfile/" mapping="/upfile/**" />-->
-    <mvc:resources location="/lib/" mapping="/js/**"/>
-    <mvc:resources location="/app/" mapping="/app/**"/>
+    <!--<mvc:resources location="/lib/" mapping="/js/**"/>-->
+    <!--<mvc:resources location="/app/" mapping="/app/**"/>-->
     <mvc:resources location="/" mapping="/**"/>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

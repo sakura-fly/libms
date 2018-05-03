@@ -35,8 +35,7 @@ img{ display:block;}
 .tezy li a { line-height:52px; color:#333; padding-left:30px; width:215px; border-bottom:1px solid #999; background:url(../imgs/moo.png) 200px  center no-repeat;}
 .tezy li:hover{ background-color:#00b1a1;}
 .tezy li:hover a{ color:#fff; background:url(../imgs/mo.png) 200px  center no-repeat;}
-
-.nav_right{ float:right; width:940px;}
+.nav_right{ float:right; /*width:940px;*/align-content: right}
 .nav_right>ul>li{ float:left; position:relative; height:48px;}
 .nav_right>ul>li:hover{ background-color:#ff7701;}
 .nav_right>ul>li>a{ width:94px; line-height:48px; height:48px; color:#fff; text-align:center;}
