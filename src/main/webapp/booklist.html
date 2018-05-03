@@ -11,17 +11,50 @@
 </head>
 <body>
 <div class="container">
+    <ul id="demo">
+        <div class="col-lg-3">
+            <img lay-src="img/fswy.jpg" alt="..." class="img-rounded img-responsive" >
+            <div align="center">
+                <p>浮生物语</p>
+                <p>一本好书</p>
+                <p>剩余23本</p>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <img lay-src="img/fswy.jpg" alt="..." class="img-rounded img-responsive" >
+            <div align="center">
+                <p>浮生物语</p>
+                <p>一本好书</p>
+                <p>剩余23本</p>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <img lay-src="img/fswy.jpg" alt="..." class="img-rounded img-responsive" >
+            <div align="center">
+                <p>浮生物语</p>
+                <p>一本好书</p>
+                <p>剩余23本</p>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <img lay-src="img/fswy.jpg" alt="..." class="img-rounded img-responsive" >
+            <div align="center">
+                <p>浮生物语</p>
+                <p>一本好书</p>
+                <p>剩余23本</p>
+            </div>
+        </div>
+    </ul>
 
 </div>
-<ul id="demo">
 
-</ul>
 </body>
 </html>
 <script type="application/javascript">
     layui.use('flow', function () {
         var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
         var flow = layui.flow;
+        flow.lazyimg();
         flow.load({
             elem: '#demo' //指定列表容器
             , done: function (page, next) { //到达临界点（默认滚动触发），触发下一页
@@ -30,10 +63,44 @@
                 //模拟数据插入
                 setTimeout(function(){
                     var lis = [];
-                    for(var i = 0; i < 8; i++){
-                        lis.push('<li>'+ ( (page-1)*8 + i + 1 ) +'</li>')
-                    }
-
+                    // for(var i = 0; i < 8; i++){
+                    //     lis.push('<li>'+ ( (page-1)*8 + i + 1 ) +'</li>')
+                    // }
+                    lis.push("" +
+                        "<ul id=\"demo\">\n" +
+                        "    <div class=\"col-lg-3\">\n" +
+                        "        <img lay-src=\"img/fswy.jpg\" alt=\"...\" class=\"img-rounded img-responsive\" >\n" +
+                        "        <div align=\"center\">\n" +
+                        "            <p>浮生物语</p>\n" +
+                        "            <p>一本好书</p>\n" +
+                        "            <p>剩余23本</p>\n" +
+                        "        </div>\n" +
+                        "    </div>\n" +
+                        "    <div class=\"col-lg-3\">\n" +
+                        "        <img lay-src=\"img/fswy.jpg\" alt=\"...\" class=\"img-rounded img-responsive\" >\n" +
+                        "        <div align=\"center\">\n" +
+                        "            <p>浮生物语</p>\n" +
+                        "            <p>一本好书</p>\n" +
+                        "            <p>剩余23本</p>\n" +
+                        "        </div>\n" +
+                        "    </div>\n" +
+                        "    <div class=\"col-lg-3\">\n" +
+                        "        <img lay-src=\"img/fswy.jpg\" alt=\"...\" class=\"img-rounded img-responsive\" >\n" +
+                        "        <div align=\"center\">\n" +
+                        "            <p>浮生物语</p>\n" +
+                        "            <p>一本好书</p>\n" +
+                        "            <p>剩余23本</p>\n" +
+                        "        </div>\n" +
+                        "    </div>\n" +
+                        "    <div class=\"col-lg-3\">\n" +
+                        "        <img lay-src=\"img/fswy.jpg\" alt=\"...\" class=\"img-rounded img-responsive\" >\n" +
+                        "        <div align=\"center\">\n" +
+                        "            <p>浮生物语</p>\n" +
+                        "            <p>一本好书</p>\n" +
+                        "            <p>剩余23本</p>\n" +
+                        "        </div>\n" +
+                        "    </div>\n" +
+                        "</ul>")
                     //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
                     //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
                     next(lis.join(''), page < 10); //假设总页数为 10
