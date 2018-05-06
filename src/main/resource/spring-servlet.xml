@@ -13,7 +13,15 @@
     <bean
             class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
-    
+    <!--配置hibernate-->
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" lazy-init="false">
+        <!-- 注入datasource，给sessionfactoryBean内setdatasource提供数据源 -->
+        <!--<property name="dataSource" ref="dataSource" />-->
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+        <!-- //加载实体类的映射文件位置及名称 -->
+        <!--<property name="mappingLocations" value="classpath:com/demo/ssm/po/*.hbm.xml"></property>-->
+    </bean>
 
     <context:component-scan base-package="com.libmss.controller"/>
     <context:component-scan base-package="com.libmss.dao"/>

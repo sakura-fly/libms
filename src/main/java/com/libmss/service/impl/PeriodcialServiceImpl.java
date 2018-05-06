@@ -7,12 +7,12 @@ import com.libmss.service.PeriodicalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.jnlp.PersistenceService;
 @Component
 public class PeriodcialServiceImpl extends BaseServiceImpl<Periodical>  implements PeriodicalService {
 
 
     public PeriodcialServiceImpl(PeriodicalDao periodicalDao) {
         super(periodicalDao);
+        // sys
     }
 }
