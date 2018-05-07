@@ -30,7 +30,7 @@
 
             <div class="form-group">
                 <label></label>
-                <button id="login" type="button" class="btn btn-info" style="width: 100%">登录</button>
+                <button id="regist" type="button" class="btn btn-info" style="width: 100%">注册</button>
             </div>
             <a href="login.html">登录</a>
 
@@ -41,3 +41,22 @@
 </div>
 </body>
 </html>
+<script type="application/javascript">
+    $("#regist").click(function(event) {
+        $.ajax({
+            url: '/libms/regist',
+            type: 'post',
+            dataType: 'json',
+            data: {pwd: $("#pwd").val(),uname:$('#userName').val()},
+        })
+        .done(function() {
+            console.log("success");
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+    });
+</script>

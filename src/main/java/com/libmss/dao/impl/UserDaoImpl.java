@@ -17,7 +17,7 @@ import java.util.List;
 public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
     public UserDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
-        selectSql.append("select * from user where 1=1");
+        selectSql.append("select * from user_tb where 1=1");
 
     }
 

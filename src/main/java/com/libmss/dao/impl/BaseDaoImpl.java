@@ -6,6 +6,7 @@ import com.libmss.model.User;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -24,9 +25,12 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
     @Override
     public int add(T t) {
-        int stat = 1;
+        int stat = -1;
         try {
+            // session.
             Serializable s = session.save(t);
+            // Transaction tt = session.beginTransaction();
+            // tt.commit();
             stat = 1;
         } catch (Exception e) {
             e.printStackTrace();

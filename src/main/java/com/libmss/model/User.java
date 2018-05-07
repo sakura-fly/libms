@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user_tb")
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
+    private int id = -2233;
     private  String uname;
     private String name;
     private String pwd;
@@ -24,6 +24,14 @@ public class User {
         this.pwd = pwd;
         this.ctime = ctime;
         this.phone = phone;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUname() {

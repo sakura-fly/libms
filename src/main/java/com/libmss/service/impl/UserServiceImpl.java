@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
 
-    public UserServiceImpl(UserDao userDao) {
-        super(userDao);
+    public UserServiceImpl(UserDao userDaoImpl) {
+        super(userDaoImpl);
     }
 
 

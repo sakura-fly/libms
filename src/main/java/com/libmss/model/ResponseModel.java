@@ -62,4 +62,15 @@ public class ResponseModel<T> {
     public void setData(List<T> data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "ResponseModel{" +
+                "code=" + code +
+                ", msg='" + msg + '\'' +
+                ", model=" + model +
+                ", data=" + data +
+                ", count=" + count +
+                '}';
+    }
 }
