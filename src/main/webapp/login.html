@@ -48,7 +48,12 @@
 
             },
         })
-        .done(function() {
+        .done(function(e ) {
+            if (e.code == 1) {
+                window.location.href = "/libms/index.html";
+            } else {
+                alert(e.msg);
+            }
             console.log("success");
         })
         .fail(function() {
