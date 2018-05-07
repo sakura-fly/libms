@@ -29,8 +29,9 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         try {
             // session.
             Serializable s = session.save(t);
-            // Transaction tt = session.beginTransaction();
-            // tt.commit();
+            Transaction tt = session.beginTransaction();
+            tt.commit();
+            // session.close()
             stat = 1;
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,6 +51,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         // Class<User> uc = User.class;
         Class<?> c = t.getClass();
         Field[] uf = c.getDeclaredFields();
+        String  selectSqlOld = selectSql.toString();
         for (int i = 0; i < uf.length; i++) {
             Field f = uf[i];
             f.setAccessible(true);
@@ -72,6 +74,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
         }
         SQLQuery sql = session.createSQLQuery(selectSql.toString());
+        selectSql = new StringBuffer(selectSqlOld);
         sql.addEntity(t.getClass());
         for (int i = 0; i < uf.length; i++) {
             Field f = uf[i];
@@ -95,10 +98,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
             }
 
         }
-        // sql = setHibernatequery(sql,t);
         return sql.list();
-        // Criteria cr = session.createCriteria(t.getClass());
-        //
     }
 
     @Override
