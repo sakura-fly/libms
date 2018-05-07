@@ -9,4 +9,5 @@ import java.util.List;
 @Component
 
 public interface UserDao extends BaseDao<User>{
+    public List<User> login(User user);
 }

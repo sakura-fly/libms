@@ -9,6 +9,7 @@ import com.libmss.model.ResponseModel;
 import com.libmss.model.User;
 import com.libmss.service.BaseService;
 import com.libmss.service.UserService;
+import com.libmss.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,8 @@ import java.util.List;
 @Component
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
+    @Autowired
+    UserDao userDao;
 
     public UserServiceImpl(UserDao userDaoImpl) {
         super(userDaoImpl);
@@ -31,9 +34,11 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Override
     public ResponseModel<User> login(User user) {
+        user.setPwd(MD5.md5(user.getPwd()));
+
         ResponseModel<User> rm = new ResponseModel<User>();
         PageModel pm = new PageModel();
-        List<User> r = dao.list(pm, user);
+        List<User> r = userDao.login(user);
         if (r.size() == 0){
             rm.setMsg("用户名或密码错误");
             rm.setCode(-1);
@@ -48,6 +53,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Override
     public ResponseModel<User> regist(User user) {
+        user.setPwd(MD5.md5(user.getPwd()));
         ResponseModel<User> rm = new ResponseModel<User>();
         int r = dao.add(user);
         rm.setCode(r);

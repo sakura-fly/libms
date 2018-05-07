@@ -10,12 +10,13 @@ import org.hibernate.Transaction;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
-    private Session session;
+    protected Session session;
     protected StringBuffer selectSql = new StringBuffer();
     protected SessionFactory sessionFactory;
 
@@ -57,9 +58,9 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         List<T> res = new ArrayList<>();
         Class<?> c = t.getClass();
         Field[] uf = c.getDeclaredFields();
-        String  selectSqlOld = selectSql.toString();
         session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
+        StringBuffer selectSqla = new StringBuffer();
         try {
             for (int i = 0; i < uf.length; i++) {
                 Field f = uf[i];
@@ -68,13 +69,14 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
                 try {
                     Object val = f.get(t);
                     String type = f.getType().toString();
+
                     if (type.endsWith( "int" ) || type.endsWith( "Integer" )){
                         if ((int)val != -2233){
-                            selectSql.append(" and " + name + " like :" + name);
+                            selectSqla.append(" and ").append(name).append(" like :").append(name);
                         }
                     } else {
                         if (val != null && !val.toString().isEmpty()){
-                            selectSql.append(" and " + name + " like :" + name);
+                            selectSqla.append(" and ").append(name).append(" like :").append(name);
                         }
                     }
                 } catch (IllegalAccessException e) {
@@ -82,8 +84,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
                 }
 
             }
-            SQLQuery sql = session.createSQLQuery(selectSql.toString());
-            selectSql = new StringBuffer(selectSqlOld);
+            SQLQuery sql = session.createSQLQuery(selectSql.toString() + selectSqla.toString());
             sql.addEntity(t.getClass());
             for (int i = 0; i < uf.length; i++) {
                 Field f = uf[i];
