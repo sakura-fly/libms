@@ -61,11 +61,11 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
                 String type = f.getType().toString();
                 if (type.endsWith( "int" ) || type.endsWith( "Integer" )){
                     if ((int)val != -2233){
-                        selectSql.append(" and " + name + " = :" + name);
+                        selectSql.append(" and " + name + " like :" + name);
                     }
                 } else {
                     if (val != null && !val.toString().isEmpty()){
-                        selectSql.append(" and " + name + " = :" + name);
+                        selectSql.append(" and " + name + " like :" + name);
                     }
                 }
             } catch (IllegalAccessException e) {
@@ -86,11 +86,11 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
                 if (type.endsWith( "int" ) || type.endsWith( "Integer" )){
                     if ((int)val != -2233){
                         // selectSql.append(" and " + name + " = :" + name);
-                        sql.setParameter(name,val);
+                        sql.setParameter(name,"%" + val + "%");
                     }
                 } else {
                     if (val != null && !val.toString().isEmpty()){
-                        sql.setParameter(name,val);
+                        sql.setParameter(name,"%" + val + "%");
                     }
                 }
             } catch (IllegalAccessException e) {

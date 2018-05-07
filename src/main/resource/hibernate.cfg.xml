@@ -20,6 +20,7 @@
         <!--<mapping class="entity.Grade"/>-->
         <!--<mapping package="com.libmss.model"/>-->
         <mapping class="com.libmss.model.User"/>
+
     </session-factory>
 
 </hibernate-configuration>
