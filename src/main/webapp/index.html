@@ -9,6 +9,7 @@
     <script src="js/jquery.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/jquery1.42.min.js"></script>
     <script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="lib/js/js.cookie.min.js"></script>
 
 
 </head>
@@ -76,6 +77,11 @@
     </ul>
 </div>
 <script>
+    var cu = Cookies.get("user");
+    console.log(cu)
+    if(cu) {
+
+    }
     /*重新设置banner宽度*/
     $(".banner").css({width: 1920 * $(".banner img").length});
     /*记录播放索引值*/
@@ -153,36 +159,36 @@
     </div>
     <!--banner下的第一个板块第三个div的板块-->
     <!--<div class="xinxi_three">-->
-        <!--<div class="three_ban">-->
-            <!--<ul>-->
-                <!--<li><a href="#" target="_blank"><img src="imgs/icon1.png"/>-->
-                    <!--<p>学生风采</p></a></li>-->
-                <!--<li><a href="#" target="_blank"><img src="imgs/icon2.png"/>-->
-                    <!--<p>教研活动</p></a></li>-->
-                <!--<li><a href="#" target="_blank"><img src="imgs/icon3.png"/>-->
-                    <!--<p>教师队伍</p></a></li>-->
-                <!--<li><a href="#" target="_blank"><img src="imgs/icon4.png"/>-->
-                    <!--<p>咨询1号</p></a></li>-->
-                <!--<li><a href="#" target="_blank"><img src="imgs/icon4.png"/>-->
-                    <!--<p>咨询2号</p></a></li>-->
-                <!--<li><a href="#" target="_blank"><img src="imgs/icon4.png"/>-->
-                    <!--<p>咨询3号</p></a></li>-->
-                <!--<div class="cb"></div>-->
-            <!--</ul>-->
-        <!--</div>-->
-        <!--<div class="three_list">-->
-            <!--<ul>-->
-                <!--<li><a href="#" target="_blank"><img src="imgs/ricon.png"/>-->
-                    <!--<p>报名须知</p></a></li>-->
-                <!--<li><a href="#" target="_blank"><img src="imgs/ricon2.png"/>-->
-                    <!--<p>联系我们</p></a></li>-->
-                <!--<li><a href="#" target="_blank"><img src="imgs/ricon3.png"/>-->
-                    <!--<p>校园动态</p></a></li>-->
-                <!--<li><a href="#" target="_blank"><img src="imgs/ricon4.png"/>-->
-                    <!--<p>学院简介</p></a></li>-->
-                <!--<div class="cb"></div>-->
-            <!--</ul>-->
-        <!--</div>-->
+    <!--<div class="three_ban">-->
+    <!--<ul>-->
+    <!--<li><a href="#" target="_blank"><img src="imgs/icon1.png"/>-->
+    <!--<p>学生风采</p></a></li>-->
+    <!--<li><a href="#" target="_blank"><img src="imgs/icon2.png"/>-->
+    <!--<p>教研活动</p></a></li>-->
+    <!--<li><a href="#" target="_blank"><img src="imgs/icon3.png"/>-->
+    <!--<p>教师队伍</p></a></li>-->
+    <!--<li><a href="#" target="_blank"><img src="imgs/icon4.png"/>-->
+    <!--<p>咨询1号</p></a></li>-->
+    <!--<li><a href="#" target="_blank"><img src="imgs/icon4.png"/>-->
+    <!--<p>咨询2号</p></a></li>-->
+    <!--<li><a href="#" target="_blank"><img src="imgs/icon4.png"/>-->
+    <!--<p>咨询3号</p></a></li>-->
+    <!--<div class="cb"></div>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--<div class="three_list">-->
+    <!--<ul>-->
+    <!--<li><a href="#" target="_blank"><img src="imgs/ricon.png"/>-->
+    <!--<p>报名须知</p></a></li>-->
+    <!--<li><a href="#" target="_blank"><img src="imgs/ricon2.png"/>-->
+    <!--<p>联系我们</p></a></li>-->
+    <!--<li><a href="#" target="_blank"><img src="imgs/ricon3.png"/>-->
+    <!--<p>校园动态</p></a></li>-->
+    <!--<li><a href="#" target="_blank"><img src="imgs/ricon4.png"/>-->
+    <!--<p>学院简介</p></a></li>-->
+    <!--<div class="cb"></div>-->
+    <!--</ul>-->
+    <!--</div>-->
     <!--</div>-->
     <div class="cb"></div>
 </div>

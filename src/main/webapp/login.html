@@ -5,6 +5,7 @@
     <title>登录</title>
     <script type="text/javascript" src="lib/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/js/js.cookie.min.js"></script>
     <link rel="stylesheet" href="lib/css/bootstrap.min.css">
 </head>
 <body style="background: #eeeeee">
@@ -50,6 +51,7 @@
         })
         .done(function(e ) {
             if (e.code == 1) {
+                Cookies.set("user",e.model);
                 window.location.href = "/libms/index.html";
             } else {
                 alert(e.msg);
