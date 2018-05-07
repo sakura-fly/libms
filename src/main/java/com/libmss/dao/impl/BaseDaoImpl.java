@@ -62,7 +62,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
                         selectSql.append(" and " + name + " = :" + name);
                     }
                 } else {
-                    if (val != null){
+                    if (val != null && !val.toString().isEmpty()){
                         selectSql.append(" and " + name + " = :" + name);
                     }
                 }
