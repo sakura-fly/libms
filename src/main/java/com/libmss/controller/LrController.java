@@ -24,4 +24,13 @@ public class LrController {
        return  userService.regist(user);
     }
 
+    @RequestMapping(value = "/sigin", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseModel sigin(User user){
+        // user.setCtime(new Date());
+       return  userService.login(user);
+    }
+
+
+
 }

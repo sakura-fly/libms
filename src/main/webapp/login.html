@@ -36,3 +36,27 @@
 </div>
 </body>
 </html>
+<script type="application/javascript">
+    $("#login").click(function () {
+        $.ajax({
+            url: '/libms/sigin',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                uname: $("#userName").val(),
+                pwd: $("#pwd").val(),
+
+            },
+        })
+        .done(function() {
+            console.log("success");
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            console.log("complete");
+        });
+        
+    })
+</script> 
