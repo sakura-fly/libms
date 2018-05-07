@@ -6,7 +6,7 @@ public class Periodical {
     private String author;
     private String publisher;
     private String edition;
-    private int num;
+    private int num = -2233;
 
     public Periodical(String name, double price, String author, String publisher, String edition, int num) {
         this.name = name;

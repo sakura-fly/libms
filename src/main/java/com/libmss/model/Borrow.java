@@ -3,12 +3,12 @@ package com.libmss.model;
 import java.util.Date;
 
 public class Borrow {
-    private int uid;
-    private int type;
-    private int bid;
+    private int uid = -2233;
+    private int type = -2233;
+    private int bid = -2233;
     private Date op;
     private Date ed;
-    private int stat;
+    private int stat = -2233;
 
     public Borrow() {
     }

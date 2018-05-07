@@ -6,7 +6,7 @@ public class Book {
     private String author;
     private String publisher;
     private String edition;
-    private int num;
+    private int num = -2233;
 
     public Book() {
     }

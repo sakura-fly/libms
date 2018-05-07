@@ -5,31 +5,25 @@ import com.libmss.dao.UserDao;
 import com.libmss.model.PageModel;
 import com.libmss.model.User;
 import org.hibernate.SQLQuery;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Component
 public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
-    @Override
-    protected void setSelectSql(User user) {
-        StringBuffer userSelectSql = new StringBuffer("select * from user where 1=1");
-        userSelectSql.append(user.getName() == null ? "" : "and name=?");
-        if()
-    }
-
-    @Override
-    protected SQLQuery setHibernateSetParameter(SQLQuery query, User user) {
-        return null;
-    }
-
-
-    public UserDaoImpl() {
-        super();
+    public UserDaoImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+        selectSql.append("select * from user where 1=1");
 
     }
+
+
+
+
 
 
     // @Override

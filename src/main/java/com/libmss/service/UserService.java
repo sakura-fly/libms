@@ -9,8 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface UserService {
+public interface UserService extends BaseService<User>{
 
-    public ResponseModel<Book> findById(int id);
-    public ResponseModel<Book> login(Book book);
+    public ResponseModel<User> findById(int id);
+    public ResponseModel<User> login(User user);
+    public ResponseModel<User> regist(User user);
 }

@@ -21,16 +21,23 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
 
     @Override
-    public ResponseModel<Book> findById(int id) {
-        ResponseModel<Book> rm = new ResponseModel<Book>();
-
+    public ResponseModel<User> findById(int id) {
+        ResponseModel<User> rm = new ResponseModel<User>();
         return rm;
     }
 
     @Override
-    public ResponseModel<Book> login(Book book) {
-        ResponseModel<Book> rm = new ResponseModel<Book>();
+    public ResponseModel<User> login(User user) {
+        ResponseModel<User> rm = new ResponseModel<User>();
         return rm;
     }
 
+    @Override
+    public ResponseModel<User> regist(User user) {
+        ResponseModel<User> rm = new ResponseModel<User>();
+        int r = dao.add(user);
+        rm.setCode(r);
+        // rm.setMsg();
+        return rm;
+    }
 }

@@ -2,26 +2,23 @@ package com.libmss.dao.impl;
 
 import com.libmss.dao.BaseDao;
 import com.libmss.model.PageModel;
+import com.libmss.model.User;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.List;
 
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
-    @Autowired
-    private SessionFactory sessionFactory;
     private Session session;
-    protected String selectSql;
+    protected StringBuffer selectSql = new StringBuffer();
 
 
-    protected abstract void setSelectSql(T t);
-    protected abstract SQLQuery setHibernateSetParameter(SQLQuery query,T t);
 
-    public BaseDaoImpl() {
+    public BaseDaoImpl(SessionFactory sessionFactory) {
         session = sessionFactory.openSession();
     }
 
@@ -44,9 +41,57 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
     @Override
     public List<T> list(PageModel pageModel, T t) {
-        SQLQuery sql = session.createSQLQuery(selectSql);
+
+
+        // Class<User> uc = User.class;
+        Class<?> c = t.getClass();
+        Field[] uf = c.getDeclaredFields();
+        for (int i = 0; i < uf.length; i++) {
+            Field f = uf[i];
+            f.setAccessible(true);
+            String name = f.getName();
+            try {
+                Object val = f.get(t);
+                String type = f.getType().toString();
+                if (type.endsWith( "int" ) || type.endsWith( "Integer" )){
+                    if ((int)val != -2233){
+                        selectSql.append(" and " + name + " = :" + name);
+                    }
+                } else {
+                    if (val != null){
+                        selectSql.append(" and " + name + " = :" + name);
+                    }
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
+        }
+        SQLQuery sql = session.createSQLQuery(selectSql.toString());
         sql.addEntity(t.getClass());
-        sql = setHibernateSetParameter(sql,t);
+        for (int i = 0; i < uf.length; i++) {
+            Field f = uf[i];
+            f.setAccessible(true);
+            String name = f.getName();
+            try {
+                Object val = f.get(t);
+                String type = f.getType().toString();
+                if (type.endsWith( "int" ) || type.endsWith( "Integer" )){
+                    if ((int)val != -2233){
+                        // selectSql.append(" and " + name + " = :" + name);
+                        sql.setParameter(name,val);
+                    }
+                } else {
+                    if (val != null){
+                        sql.setParameter(name,val);
+                    }
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
+        }
+        // sql = setHibernatequery(sql,t);
         return sql.list();
         // Criteria cr = session.createCriteria(t.getClass());
         //

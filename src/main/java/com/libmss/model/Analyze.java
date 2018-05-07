@@ -2,7 +2,7 @@ package com.libmss.model;
 
 public class Analyze {
     private String type;
-    private long num;
+    private long num = -2233;
 
     public Analyze(String type, long num) {
         this.type = type;
