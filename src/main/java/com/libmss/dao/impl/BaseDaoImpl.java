@@ -86,7 +86,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
                         sql.setParameter(name,val);
                     }
                 } else {
-                    if (val != null){
+                    if (val != null && !val.toString().isEmpty()){
                         sql.setParameter(name,val);
                     }
                 }
