@@ -26,10 +26,12 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
     @Override
     public int add(T t) {
         int stat = -1;
+        Transaction tt = session.beginTransaction();
         try {
             // session.
+
             Serializable s = session.save(t);
-            Transaction tt = session.beginTransaction();
+
             tt.commit();
             // session.close()
             stat = 1;
@@ -52,6 +54,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         Class<?> c = t.getClass();
         Field[] uf = c.getDeclaredFields();
         String  selectSqlOld = selectSql.toString();
+        Transaction tx = session.beginTransaction();
         for (int i = 0; i < uf.length; i++) {
             Field f = uf[i];
             f.setAccessible(true);
@@ -98,6 +101,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
             }
 
         }
+        tx.commit();
         return sql.list();
     }
 
