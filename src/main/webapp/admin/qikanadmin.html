@@ -37,7 +37,7 @@
             <input class="form-control" type="text" name="" id="bookname" placeholder="名称">
             <!--<input class="form-control" type="text" name="" id="author" placeholder="作者">-->
             <input class="form-control" type="text" name="" id="publisher" placeholder="出版社">
-            <button class="btn btn-primary">查询</button>
+            <button class="btn btn-primary" id="search">查询</button>
         </div>
     </div>
     <div class="tgroup">
@@ -97,6 +97,16 @@
                 }
             });
 
+            $("#search").click(function () {
+
+                table.reload("qktb", {
+                    where: {
+                        name: $("#bookname").val(),
+                        publisher: $("#publisher").val()
+                    }
+                })
+
+            });
 
             $("#addbook").click(function (e) {
                 layui.use('layer', function () {
