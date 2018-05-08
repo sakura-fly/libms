@@ -2,7 +2,7 @@ package com.libmss.model;
 
 public class Book {
     private String name;
-    private double price;
+    private double price = -2233;
     private String author;
     private String publisher;
     private String edition;

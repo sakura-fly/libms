@@ -1,8 +1,15 @@
 package com.libmss.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Periodical {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private int id = -2233;
     private String name;
-    private double price;
+    private double price = -2233;
     private String author;
     private String publisher;
     private String edition;
@@ -20,6 +27,13 @@ public class Periodical {
     public Periodical() {
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

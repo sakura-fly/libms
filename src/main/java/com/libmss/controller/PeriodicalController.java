@@ -19,12 +19,16 @@ public class PeriodicalController {
     PeriodcialServiceImpl periodicalService;
 
 
-
     @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
-    public  ResponseModel<Periodical> list(PageModel pageModel, Periodical periodical){
-        ResponseModel<Periodical> r = periodicalService.list(pageModel, periodical);
-        return r;
+    public ResponseModel<Periodical> list(PageModel pageModel, Periodical periodical) {
+        return periodicalService.list(pageModel, periodical);
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseModel<Periodical> add(Periodical periodical) {
+        return periodicalService.add(periodical);
     }
 
 }

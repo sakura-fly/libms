@@ -24,5 +24,10 @@ public class BookController {
     public ResponseModel<Book> list(Book book, PageModel pageModel){
         return bookService.list(pageModel,book);
     }
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseModel<Book> add(Book book){
+        return bookService.add(book);
+    }
 
 }

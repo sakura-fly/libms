@@ -70,12 +70,16 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
                     Object val = f.get(t);
                     String type = f.getType().toString();
 
-                    if (type.endsWith( "int" ) || type.endsWith( "Integer" )){
-                        if ((int)val != -2233){
+                    if (type.endsWith("int") || type.endsWith("Integer")) {
+                        if ((int) val != -2233) {
+                            selectSqla.append(" and ").append(name).append(" like :").append(name);
+                        }
+                    } else if (type.endsWith("double") || type.endsWith("Double")) {
+                        if ((double) val != -2233) {
                             selectSqla.append(" and ").append(name).append(" like :").append(name);
                         }
                     } else {
-                        if (val != null && !val.toString().isEmpty()){
+                        if (val != null && !val.toString().isEmpty()) {
                             selectSqla.append(" and ").append(name).append(" like :").append(name);
                         }
                     }
@@ -93,14 +97,18 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
                 try {
                     Object val = f.get(t);
                     String type = f.getType().toString();
-                    if (type.endsWith( "int" ) || type.endsWith( "Integer" )){
-                        if ((int)val != -2233){
+                    if (type.endsWith("int") || type.endsWith("Integer")) {
+                        if ((int) val != -2233) {
                             // selectSql.append(" and " + name + " = :" + name);
-                            sql.setParameter(name,"%" + val + "%");
+                            sql.setParameter(name, "%" + val + "%");
+                        }
+                    }  else if (type.endsWith("double") || type.endsWith("Double")) {
+                        if ((double) val != -2233) {
+                            sql.setParameter(name, "%" + val + "%");
                         }
                     } else {
-                        if (val != null && !val.toString().isEmpty()){
-                            sql.setParameter(name,"%" + val + "%");
+                        if (val != null && !val.toString().isEmpty()) {
+                            sql.setParameter(name, "%" + val + "%");
                         }
                     }
                 } catch (IllegalAccessException e) {
@@ -109,7 +117,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
             }
             res = sql.list();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         tx.commit();
