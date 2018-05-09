@@ -32,7 +32,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
         ResponseModel<T> rm = new ResponseModel<T>();
         int stat = dao.update(t);
         rm.setCode(stat);
-        rm.setMsg(stat == 0 ? StringValue.RESPONSE_SUCCES : StringValue.RESPONSE_FAILD);
+        rm.setMsg(stat == 1 ? StringValue.RESPONSE_SUCCES : StringValue.RESPONSE_FAILD);
         return rm;
     }
 

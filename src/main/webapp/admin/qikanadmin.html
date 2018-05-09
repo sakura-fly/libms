@@ -63,6 +63,13 @@
         return d;
     }
 
+    function setDate(obj, data) {
+        for (var i = 0; i < obj.length; i++) {
+            console.log($(obj[i]).attr("name"))
+            $(obj[i]).val(data[$(obj[i]).attr("name")]);
+        }
+    }
+
 
     $(document).ready(function () {
         layui.use('table', function () {
@@ -73,10 +80,12 @@
                 method: "post",
                 page: true,
                 cols: [[
+                    // {field: 'id', title: 'id'},
                     {field: 'name', title: '名称'},
                     {field: 'publisher', title: '出版社'},
                     {field: 'edition', title: '期数'},
                     {field: 'num', title: '数量'},
+                    {field: 'price', title: '单价'},
                     {fixed: 'right', width: 200, align: 'center', toolbar: '#barDemo', title: '操作'}
                 ]]
 
@@ -93,7 +102,9 @@
                         layer.close(index);
                     });
                 } else if (obj.event === 'edit') {
-                    layer.alert('编辑行：<br>' + JSON.stringify(data))
+                    setDate($(".bookinput"), data);
+                    tc("/libms/periodical/update");
+                    console.log(JSON.stringify(data))
                 }
             });
 
@@ -108,47 +119,51 @@
 
             });
 
+            function tc (url) {
+                layer.open({
+                    type: 1,
+                    content: $('#bookmsg'), //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    btn: ['确定', '取消'],
+                    btn1: function () {
+                        var ac = false;
+                        var d = $(".bookinput");
+                        var data = rDate(d);
+                        console.log(data);
+                        $.ajax({
+                            url: url,
+                            type: 'post',
+                            dataType: 'json',
+                            data: data,
+                            async: false
+                        }).done(function (e) {
+                            if (e.code == 1) {
+                                ac = true;
+                                table.reload("qktb")
+                            } else {
+                                alert(e.msg)
+                            }
+                            console.log("success");
+                        })
+                            .fail(function () {
+                                alert("操作失败")
+                            })
+                            .always(function () {
+                                console.log("complete");
+                            });
+                        return true;
+                    },
+                    end: function () {
+                        $(".bookinput").val("");
+                    }
+
+                });
+            }
+
             $("#addbook").click(function (e) {
                 layui.use('layer', function () {
                     var layer = layui.layer;
+                    tc("/libms/periodical/add");
 
-                    layer.open({
-                        type: 1,
-                        content: $('#bookmsg'), //这里content是一个DOM，注意：最好该元素要存放在body最外层，否则可能被其它的相对元素所影响
-                        btn: ['确定', '取消'],
-                        btn1: function () {
-                            var ac = false;
-                            var d = $(".bookinput");
-                            var data = rDate(d);
-                            console.log(data);
-                            $.ajax({
-                                url: '/libms/periodical/add',
-                                type: 'post',
-                                dataType: 'json',
-                                data: data,
-                                async: false
-                            }).done(function (e) {
-                                if (e.code == 1) {
-                                    ac = true;
-                                    table.reload("qktb")
-                                } else {
-                                    alert(e.msg)
-                                }
-                                console.log("success");
-                            })
-                                .fail(function () {
-                                    alert("添加失败")
-                                })
-                                .always(function () {
-                                    console.log("complete");
-                                });
-                            return true;
-                        },
-                        end: function () {
-                            $(".bookinput").val("");
-                        }
-
-                    });
                 });
 
             });

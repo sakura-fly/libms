@@ -48,7 +48,20 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
     @Override
     public int update(T t) {
-        return 0;
+        int stat = -1;
+        session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        try {
+            session.update(t);
+            tx.commit();
+            session.close();
+            stat = 1;
+        } catch (Exception e) {
+            session.update(t);
+            tx.commit();
+            e.printStackTrace();
+        }
+        return stat;
     }
 
     @Override

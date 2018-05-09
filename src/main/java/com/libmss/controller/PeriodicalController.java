@@ -31,4 +31,10 @@ public class PeriodicalController {
         return periodicalService.add(periodical);
     }
 
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseModel<Periodical> update(Periodical periodical) {
+        return periodicalService.update(periodical);
+    }
+
 }

@@ -10,15 +10,13 @@ public class Periodical {
     private int id = -2233;
     private String name;
     private double price = -2233;
-    private String author;
     private String publisher;
     private String edition;
     private int num = -2233;
 
-    public Periodical(String name, double price, String author, String publisher, String edition, int num) {
+    public Periodical(String name, double price, String publisher, String edition, int num) {
         this.name = name;
         this.price = price;
-        this.author = author;
         this.publisher = publisher;
         this.edition = edition;
         this.num = num;
@@ -51,13 +49,6 @@ public class Periodical {
         this.price = price;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public String getPublisher() {
         return publisher;
@@ -88,7 +79,6 @@ public class Periodical {
         return "PeriodicalDao{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
-                ", author='" + author + '\'' +
                 ", publisher='" + publisher + '\'' +
                 ", edition='" + edition + '\'' +
                 '}';
