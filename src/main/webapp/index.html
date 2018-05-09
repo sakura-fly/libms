@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8"/>
@@ -43,17 +43,11 @@
             <a href="booklist.html" target="_blank">开始浏览</a>
         </div>
         <div class="nav_right">
-            <ul>
+            <ul id="msg">
 
-                <li>
-                    <a href="booklist.html" target="_blank">gqy</a>
-                    <ul class="children">
-                        <li><a href="#" target="_blank">用户信息</a></li>
-                        <li><a href="#" target="_blank">退出</a></li>
-                    </ul>
-                </li>
+
                 <!--<li><a href="#" target="_blank">联系我们</a></li>-->
-                <li><a href="login.html" target="_blank">登录</a></li>
+
                 <div class="cb"></div>
             </ul>
         </div>
@@ -78,9 +72,18 @@
 </div>
 <script>
     var cu = Cookies.get("user");
-    console.log(cu)
+    console.log(cu);
     if(cu) {
-
+        var uu = JSON.parse(cu);
+        $("#msg").html("<li>\n" +
+            "                    <a href=\"booklist.html\" target=\"_blank\">" + uu.uname + "</a>\n" +
+            "                    <ul class=\"children\">\n" +
+            "                        <li><a href=\"#\" target=\"_blank\">用户信息</a></li>\n" +
+            "                        <li><a href=\"#\" target=\"_blank\">退出</a></li>\n" +
+            "                    </ul>\n" +
+            "                </li>")
+    } else {
+        $("#msg").html("<li><a href=\"login.html\" target=\"_blank\">登录</a></li>")
     }
     /*重新设置banner宽度*/
     $(".banner").css({width: 1920 * $(".banner img").length});
@@ -196,3 +199,4 @@
 
 </body>
 </html>
+
