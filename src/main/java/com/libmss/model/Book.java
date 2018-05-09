@@ -1,6 +1,14 @@
 package com.libmss.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Book {
+    @Id
+    private int id = -2233;
     private String name;
     private double price = -2233;
     private String author;
@@ -11,7 +19,8 @@ public class Book {
     public Book() {
     }
 
-    public Book(String name, double price, String author, String publisher, String edition, int num) {
+    public Book(int id, String name, double price, String author, String publisher, String edition, int num) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.author = author;
@@ -20,6 +29,13 @@ public class Book {
         this.num = num;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

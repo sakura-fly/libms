@@ -75,9 +75,49 @@
         });
 
 
+        $("#addbook").click(function () {
+            tc("/libms/book/add");
+        });
 
+        function tc (url) {
+            layer.open({
+                type: 1,
+                content: $('#bookmsg'),
+                btn: ['确定', '取消'],
+                btn1: function () {
+                    var ac = false;
+                    var d = $(".bookinput");
+                    var data = rDate(d);
+                    console.log(data);
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: data,
+                        async: false
+                    }).done(function (e) {
+                        if (e.code == 1) {
+                            ac = true;
+                            table.reload("qktb")
+                        } else {
+                            alert(e.msg)
+                        }
+                        console.log("success");
+                    })
+                        .fail(function () {
+                            alert("操作失败")
+                        })
+                        .always(function () {
+                            console.log("complete");
+                        });
+                    return true;
+                },
+                end: function () {
+                    $(".bookinput").val("");
+                }
 
-
+            });
+        }
     });
 
 </script>

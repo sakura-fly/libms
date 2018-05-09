@@ -21,7 +21,7 @@
         <!--<mapping class="entity.Grade"/>-->
         <!--<mapping package="com.libmss.model"/>-->
         <mapping class="com.libmss.model.User"/>
-        <!--<mapping class="com.libmss.model.Book"/>-->
+        <mapping class="com.libmss.model.Book"/>
         <mapping class="com.libmss.model.Periodical"/>
 
     </session-factory>
