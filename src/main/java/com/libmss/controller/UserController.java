@@ -20,8 +20,14 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public ResponseModel<User> list(PageModel pageModel, User user){
-        return userService.list(pageModel,user);
+    public ResponseModel<User> list(PageModel pageModel, User user) {
+        return userService.list(pageModel, user);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public ResponseModel<User> update(User user) {
+        return userService.update(user);
     }
 
 }
