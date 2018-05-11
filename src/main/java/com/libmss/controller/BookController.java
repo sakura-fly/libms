@@ -30,4 +30,10 @@ public class BookController {
         return bookService.add(book);
     }
 
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseModel<Book> update(Book book) {
+        return bookService.update(book);
+    }
+
 }
