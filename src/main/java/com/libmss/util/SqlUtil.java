@@ -138,7 +138,6 @@ public class SqlUtil {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-
         }
         return sql;
     }

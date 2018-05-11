@@ -1,5 +1,7 @@
 package com.libmss.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,6 +14,7 @@ public class User {
     private  String uname;
     private String name;
     private String pwd;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")//存日期时使用
     private Date ctime;
     private String phone;
 
