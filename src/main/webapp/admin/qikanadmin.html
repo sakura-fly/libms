@@ -102,7 +102,7 @@
                         layer.close(index);
                     });
                 } else if (obj.event === 'edit') {
-                    setDate($(".bookinput"), data);
+                    setDate($(".qkinput"), data);
                     tc("/libms/periodical/update");
                     console.log(JSON.stringify(data))
                 }
@@ -122,11 +122,11 @@
             function tc (url) {
                 layer.open({
                     type: 1,
-                    content: $('#bookmsg'),
+                    content: $('#qkmsg'),
                     btn: ['确定', '取消'],
                     btn1: function () {
                         var ac = false;
-                        var d = $(".bookinput");
+                        var d = $(".qkinput");
                         var data = rDate(d);
                         console.log(data);
                         $.ajax({
