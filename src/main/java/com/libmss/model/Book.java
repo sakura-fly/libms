@@ -1,13 +1,12 @@
 package com.libmss.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table
 public class Book {
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id = -2233;
     private String name;
     private double price = -2233;
