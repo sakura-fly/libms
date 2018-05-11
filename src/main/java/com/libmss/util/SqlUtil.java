@@ -9,7 +9,7 @@ import java.util.List;
 public class SqlUtil {
 
     public static String sqlFindLike(Object t) {
-        StringBuffer s = new StringBuffer();
+        StringBuilder s = new StringBuilder();
         Class<?> c = t.getClass();
         Field[] uf = c.getDeclaredFields();
         for (Field f : uf) {
@@ -18,12 +18,8 @@ public class SqlUtil {
             try {
                 Object val = f.get(t);
                 String type = f.getType().toString();
-                if (type.endsWith("int") || type.endsWith("Integer")) {
+                if (type.endsWith("int") || type.endsWith("Integer") || type.endsWith("double") || type.endsWith("Double") || type.endsWith("float") || type.endsWith("Float")) {
                     if ((int) val != -2233) {
-                        s.append(" and ").append(name).append(" like :").append(name);
-                    }
-                } else if (type.endsWith("double") || type.endsWith("Double")) {
-                    if ((double) val != -2233) {
                         s.append(" and ").append(name).append(" like :").append(name);
                     }
                 } else {
@@ -50,12 +46,8 @@ public class SqlUtil {
             try {
                 Object val = f.get(t);
                 String type = f.getType().toString();
-                if (type.endsWith("int") || type.endsWith("Integer")) {
+                if (type.endsWith("int") || type.endsWith("Integer") || type.endsWith("double") || type.endsWith("Double") || type.endsWith("float") || type.endsWith("Float")) {
                     if ((int) val != -2233) {
-                        s.append(" and ").append(name).append(" = :").append(name);
-                    }
-                } else if (type.endsWith("double") || type.endsWith("Double")) {
-                    if ((double) val != -2233) {
                         s.append(" and ").append(name).append(" = :").append(name);
                     }
                 } else {
@@ -81,12 +73,8 @@ public class SqlUtil {
             try {
                 Object val = f.get(t);
                 String type = f.getType().toString();
-                if (type.endsWith("int") || type.endsWith("Integer")) {
+                if (type.endsWith("int") || type.endsWith("Integer") || type.endsWith("double") || type.endsWith("Double") || type.endsWith("float") || type.endsWith("Float")) {
                     if ((int) val != -2233) {
-                        s.append(" , ").append(name).append(" = :").append(name);
-                    }
-                } else if (type.endsWith("double") || type.endsWith("Double") || type.endsWith("float") || type.endsWith("Float")) {
-                    if ((double) val != -2233) {
                         s.append(" , ").append(name).append(" = :").append(name);
                     }
                 } else {
@@ -111,12 +99,8 @@ public class SqlUtil {
             try {
                 Object val = f.get(t);
                 String type = f.getType().toString();
-                if (type.endsWith("int") || type.endsWith("Integer")) {
+                if (type.endsWith("int") || type.endsWith("Integer") || type.endsWith("double") || type.endsWith("Double") || type.endsWith("float") || type.endsWith("Float")) {
                     if ((int) val != -2233) {
-                        sql.setParameter(name, "%" + val + "%");
-                    }
-                } else if (type.endsWith("double") || type.endsWith("Double")) {
-                    if ((double) val != -2233) {
                         sql.setParameter(name, "%" + val + "%");
                     }
                 } else {
@@ -141,13 +125,9 @@ public class SqlUtil {
             try {
                 Object val = f.get(t);
                 String type = f.getType().toString();
-                if (type.endsWith("int") || type.endsWith("Integer")) {
+                if (type.endsWith("int") || type.endsWith("Integer") || type.endsWith("double") || type.endsWith("Double") || type.endsWith("float") || type.endsWith("Float")) {
                     if ((int) val != -2233) {
                         // selectSql.append(" and " + name + " = :" + name);
-                        sql.setParameter(name, val);
-                    }
-                } else if (type.endsWith("double") || type.endsWith("Double")) {
-                    if ((double) val != -2233) {
                         sql.setParameter(name, val);
                     }
                 } else {
