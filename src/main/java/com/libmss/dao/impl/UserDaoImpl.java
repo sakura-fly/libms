@@ -16,7 +16,7 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
     public UserDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
         selectSql.append("select * from user_tb where 1=1");
-
+        countSql.append("select count(*) from user_tb where 1=1");
     }
 
     @Override

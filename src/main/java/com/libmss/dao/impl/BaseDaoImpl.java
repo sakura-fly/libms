@@ -3,6 +3,7 @@ package com.libmss.dao.impl;
 import com.libmss.dao.BaseDao;
 import com.libmss.model.PageModel;
 import com.libmss.model.User;
+import com.libmss.util.SqlUtil;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,6 +19,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
     protected Session session;
     protected StringBuffer selectSql = new StringBuffer();
+    protected StringBuffer countSql = new StringBuffer();
     protected SessionFactory sessionFactory;
 
 
@@ -69,66 +71,15 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 
         List<T> res = new ArrayList<>();
-        Class<?> c = t.getClass();
-        Field[] uf = c.getDeclaredFields();
         session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        StringBuffer selectSqla = new StringBuffer();
         try {
-            for (int i = 0; i < uf.length; i++) {
-                Field f = uf[i];
-                f.setAccessible(true);
-                String name = f.getName();
-                try {
-                    Object val = f.get(t);
-                    String type = f.getType().toString();
+            String s = SqlUtil.sqlFindLike(t);
 
-                    if (type.endsWith("int") || type.endsWith("Integer")) {
-                        if ((int) val != -2233) {
-                            selectSqla.append(" and ").append(name).append(" like :").append(name);
-                        }
-                    } else if (type.endsWith("double") || type.endsWith("Double")) {
-                        if ((double) val != -2233) {
-                            selectSqla.append(" and ").append(name).append(" like :").append(name);
-                        }
-                    } else {
-                        if (val != null && !val.toString().isEmpty()) {
-                            selectSqla.append(" and ").append(name).append(" like :").append(name);
-                        }
-                    }
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+            SQLQuery sql = session.createSQLQuery(selectSql.toString() +s);
 
-            }
-            SQLQuery sql = session.createSQLQuery(selectSql.toString() + selectSqla.toString());
             sql.addEntity(t.getClass());
-            for (int i = 0; i < uf.length; i++) {
-                Field f = uf[i];
-                f.setAccessible(true);
-                String name = f.getName();
-                try {
-                    Object val = f.get(t);
-                    String type = f.getType().toString();
-                    if (type.endsWith("int") || type.endsWith("Integer")) {
-                        if ((int) val != -2233) {
-                            // selectSql.append(" and " + name + " = :" + name);
-                            sql.setParameter(name, "%" + val + "%");
-                        }
-                    }  else if (type.endsWith("double") || type.endsWith("Double")) {
-                        if ((double) val != -2233) {
-                            sql.setParameter(name, "%" + val + "%");
-                        }
-                    } else {
-                        if (val != null && !val.toString().isEmpty()) {
-                            sql.setParameter(name, "%" + val + "%");
-                        }
-                    }
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-
-            }
+            sql = SqlUtil.createSqlLike(t,sql);
             res = sql.list();
         } catch (Exception e) {
             e.printStackTrace();
@@ -140,6 +91,30 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
     @Override
     public long count(T t) {
-        return 0;
+        // 获取数量
+        long count = 0;
+        session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        try {
+            String s = SqlUtil.sqlFindLike(t);
+            SQLQuery sql = session.createSQLQuery(countSql.toString() + s);
+//            sql.addEntity(t.getClass());
+            sql = SqlUtil.createSqlLike(t,sql);
+//             count  = (long)sql.iterate().next();
+//            count = sql.executeUpdate();
+            count = ((Number) sql.list().get(0)).longValue();
+
+//            String hql = "select count(*) from User as user";
+//            Long count = (Long)getHibernateTemplate().find(hql).listIterator().next();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        tx.commit();
+        session.close();
+
+        return count;
+
     }
 }

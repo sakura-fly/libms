@@ -3,42 +3,18 @@ package com.libmss.dao.impl;
 import com.libmss.dao.NewsDao;
 import com.libmss.model.News;
 import com.libmss.model.PageModel;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Component
-public class NewsDaoImpl implements NewsDao {
-    @Override
-    public int add(News news) {
-        return 0;
-    }
+public class NewsDaoImpl extends BaseDaoImpl<News> implements NewsDao {
 
-    @Override
-    public int update(News news) {
-        return 0;
-    }
-
-    @Override
-    public List<News> list(PageModel pageModel, News news) {
-        List<News> l = new ArrayList<>();
-
-
-        l.add(new News(1,"五一大酬宾","庆祝五一，全场五折", new Date(),new Date(),new Date()));
-        l.add(new News(1,"五一大酬宾","庆祝五一，全场五折", new Date(),new Date(),new Date()));
-        l.add(new News(1,"五一大酬宾","庆祝五一，全场五折", new Date(),new Date(),new Date()));
-        l.add(new News(1,"五一大酬宾","庆祝五一，全场五折", new Date(),new Date(),new Date()));
-        l.add(new News(1,"五一大酬宾","庆祝五一，全场五折", new Date(),new Date(),new Date()));
-        l.add(new News(1,"五一大酬宾","庆祝五一，全场五折", new Date(),new Date(),new Date()));
-
-
-        return l;
-    }
-
-
-    @Override
-    public long count(News news) {
-        return 6;
+    public NewsDaoImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+        selectSql.append("select * from news where 1=1");
+        countSql.append("select count(*) from news where 1=1");
     }
 }
