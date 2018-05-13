@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table
+@Table(name = "borrow")
 public class Borrow {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -18,7 +18,9 @@ public class Borrow {
     private int stat = -2233;
     public Borrow() {
     }
-    public Borrow(int uid, int type, int bid, Date op, Date ed, int days, int stat) {
+
+    public Borrow(int id, String name, double price, String author, String publisher, String edition, int num, int uid, int type, int bid, Date op, Date ed, int days, int stat) {
+        // super(id, name, price, author, publisher, edition, num);
         this.uid = uid;
         this.type = type;
         this.bid = bid;
@@ -27,13 +29,15 @@ public class Borrow {
         this.days = days;
         this.stat = stat;
     }
-    public int getDays() {
-        return days;
+
+    public int getId() {
+        return id;
     }
 
-    public void setDays(int days) {
-        this.days = days;
+    public void setId(int id) {
+        this.id = id;
     }
+
     public int getUid() {
         return uid;
     }
@@ -74,23 +78,19 @@ public class Borrow {
         this.ed = ed;
     }
 
+    public int getDays() {
+        return days;
+    }
+
+    public void setDays(int days) {
+        this.days = days;
+    }
+
     public int getStat() {
         return stat;
     }
 
     public void setStat(int stat) {
         this.stat = stat;
-    }
-
-    @Override
-    public String toString() {
-        return "BorrowDao{" +
-                "uid=" + uid +
-                ", type=" + type +
-                ", bid=" + bid +
-                ", op=" + op +
-                ", ed=" + ed +
-                ", stat=" + stat +
-                '}';
     }
 }
