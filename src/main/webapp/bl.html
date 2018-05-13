@@ -28,7 +28,7 @@
 
     </table>
 </div>
-<div id="borrowp" >
+<div id="borrowp" hidden>
     <form class="layui-form" action="">
 
         <div class="layui-form-item">
@@ -87,7 +87,7 @@
 
                     if (cu) {
                         var user = JSON.parse(cu);
-                        $("#bname").val(data.name);
+                        $("#bname").html(data.name);
                         layer.open({
                             type: 1,
                             content: $('#borrowp'),
@@ -117,32 +117,6 @@
 
 
 
-                                // var ac = false;
-                                // var d = $(".bookinput");
-                                // var data = rDate(d);
-                                // console.log(data);
-                                // $.ajax({
-                                //     url: url,
-                                //     type: 'post',
-                                //     dataType: 'json',
-                                //     data: data,
-                                //     async: false
-                                // }).done(function (e) {
-                                //     if (e.code == 1) {
-                                //         ac = true;
-                                //         table.reload("bktb")
-                                //     } else {
-                                //         alert(e.msg)
-                                //     }
-                                //     console.log("success");
-                                // })
-                                //     .fail(function () {
-                                //         alert("操作失败")
-                                //     })
-                                //     .always(function () {
-                                //         console.log("complete");
-                                //     });
-                                // return true;
                             },
                             end: function () {
                                 $(".bookinput").val("");
