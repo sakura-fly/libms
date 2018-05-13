@@ -20,7 +20,7 @@
             <input class="form-control" type="text" name="" id="bookname" placeholder="名称">
             <input class="form-control" type="text" name="" id="author" placeholder="作者">
             <input class="form-control" type="text" name="" id="publisher" placeholder="出版社">
-            <button class="btn btn-primary">查询</button>
+            <button class="btn btn-primary" id="search">查询</button>
         </div>
     </div>
     <div class="tgroup">
@@ -37,7 +37,7 @@
 </body>
 </html>
 <script>
-
+    var table
     function rDate(obj) {
         var d = {};
         for (var i = 0; i < obj.length; i++) {
@@ -55,7 +55,7 @@
 
     $(document).ready(function () {
         layui.use('table', function () {
-            var table = layui.table;
+            table = layui.table;
             table.render({
                 elem: '#bktb',
                 url: '/libms/book/list',
@@ -95,7 +95,17 @@
         $("#addbook").click(function () {
             tc("/libms/book/add");
         });
+        $("#search").click(function () {
 
+            table.reload("bktb", {
+                where: {
+                    name: $("#bookname").val(),
+                    publisher: $("#publisher").val(),
+                    author: $("#author").val()
+                }
+            })
+
+        });
         function tc(url) {
             layer.open({
                 type: 1,
@@ -131,6 +141,7 @@
                 },
                 end: function () {
                     $(".bookinput").val("");
+                    $("*[name='id']").val("1")
                 }
 
             });

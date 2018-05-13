@@ -3,7 +3,7 @@ package com.libmss.model;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "periodical")
 public class Periodical {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
