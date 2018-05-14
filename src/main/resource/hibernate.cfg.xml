@@ -26,6 +26,7 @@
         <mapping class="com.libmss.model.Book"/>
         <mapping class="com.libmss.model.Periodical"/>
         <mapping class="com.libmss.model.Borrow"/>
+        <mapping class="com.libmss.model.News"/>
 
 
     </session-factory>
