@@ -8,26 +8,27 @@ import java.util.Date;
 public class Borrow {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
+    private int id = -2233;
     private int uid = -2233;
     private int type = -2233;
+    // @Column(insertable = false,updatable=false,nullable = false)
     private int bid = -2233;
     private Date op;
     private Date ed;
     private int days =  -2233;
     private int stat = -2233;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bid",insertable = false,updatable=false)
+    private Book book;
     public Borrow() {
     }
 
-    public Borrow(int id, String name, double price, String author, String publisher, String edition, int num, int uid, int type, int bid, Date op, Date ed, int days, int stat) {
-        // super(id, name, price, author, publisher, edition, num);
-        this.uid = uid;
-        this.type = type;
-        this.bid = bid;
-        this.op = op;
-        this.ed = ed;
-        this.days = days;
-        this.stat = stat;
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public int getId() {
