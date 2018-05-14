@@ -16,7 +16,7 @@ import java.util.List;
 public class BorrowDaoImpl extends BaseDaoImpl<Borrow> implements BorrowDao {
     public BorrowDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
-        selectSql.append("select b.*,w.* from borrow w, book b where b.id = w.bid");
+        selectSql.append("select w.*,b.* from borrow w, book b where b.id = w.bid");
         countSql.append("select count(*) from borrow where 1=1");
     }
 

@@ -21,10 +21,11 @@ public class BorrowController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public ResponseModel<Borrow> add(Borrow borrow) {
+        borrow.setStat(1);
         return borrowService.add(borrow);
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.POST)
     @ResponseBody
     public ResponseModel<Borrow> list(PageModel pageModel, Borrow borrow) {
         return borrowService.list(pageModel, borrow);

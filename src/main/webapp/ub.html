@@ -12,7 +12,7 @@
 <body>
 <div class="container">
     <table class="layui-table" id="bookfxt" lay-filter="bookfxt">
-<span style="color: #ff0000;"></span>
+        <span style="color: #ff0000;"></span>
     </table>
 </div>
 </body>
@@ -23,24 +23,26 @@
         userid = 1;
         table.render({
             elem: '#bookfxt',
-            url: '/libms/ub/list',
+            url: '/libms/borrow/list',
             method: "post",
             where: {
                 userid: userid
             },
             cols: [[
-                {field: 'bookName', title: "书籍名称"},
+                {
+                    field: 'book.name', title: "书籍名称", templet: function (d) {
+                        return d.book.name;
+                    }
+                },
                 {
                     field: 'type', title: "借阅时间", templet: function (d) {
-                        var ctime = new Date(d.bTime);
+                        var ctime = new Date(d.op);
                         return ctime.getFullYear() + "年" + (ctime.getMonth() + 1) + "月" + ctime.getDate() + "日 ";
-
-
                     }
                 },
                 {
                     field: 'type', title: "预计归还时间", templet: function (d) {
-                        var ctime = new Date(d.rTime)
+                        var ctime = new Date(d.ed)
                         return ctime.getFullYear() + "年" + (ctime.getMonth() + 1) + "月" + ctime.getDate() + "日 ";
 
 
@@ -48,8 +50,9 @@
                 },
                 {
                     field: 'type', title: "实际归还时间", templet: function (d) {
-                        if (d.rtime) {
-                            var ctime = new Date(d.rrTime)
+                        console.log(d.retime)
+                        if (d.retime) {
+                            var ctime = new Date(d.retime)
                             return ctime.getFullYear() + "年" + (ctime.getMonth() + 1) + "月" + ctime.getDate() + "日 ";
 
                         } else {
@@ -61,13 +64,13 @@
                 },
                 {
                     field: 'type', title: "距离归还剩余时间", templet: function (d) {
-                        var btime = d.rTime;
+                        var btime = d.ed;
                         var time = new Date().getTime();
-                        var t = Math.ceil((btime - time) / 1000 / 60 / 60 / 24) ;
-                        return (t > 0 ? "剩余" +  t + "天"  : "<span style=\"color: #ff0000;\">超出" + (-t) + "天</span>") ;
+                        var t = Math.ceil((btime - time) / 1000 / 60 / 60 / 24);
+                        return (t > 0 ? "剩余" + t + "天" : "<span style=\"color: #ff0000;\">超出" + (-t) + "天</span>");
                     }
                 },
-                {fixed: 'right', width:200, align:'center', toolbar: '#barDemo',  title: '操作'}
+                {fixed: 'right', width: 200, align: 'center', toolbar: '#barDemo', title: '操作'}
                 // {field: 'num', title: '借阅次数'}
             ]],
             done: function (res, curr, count) {
@@ -82,17 +85,17 @@
 
         });
         //监听工具条
-        table.on('tool(bookfxt)', function(obj){
+        table.on('tool(bookfxt)', function (obj) {
             var data = obj.data;
-            if(obj.event === 'detail'){
-                layer.msg('ID：'+ data.id + ' 的查看操作');
-            } else if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(index){
+            if (obj.event === 'detail') {
+                layer.msg('ID：' + data.id + ' 的查看操作');
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
                     obj.del();
                     layer.close(index);
                 });
-            } else if(obj.event === 'edit'){
-                layer.alert('续借：<br>'+ JSON.stringify(data))
+            } else if (obj.event === 'edit') {
+                layer.alert('续借：<br>' + JSON.stringify(data))
             }
         });
     })

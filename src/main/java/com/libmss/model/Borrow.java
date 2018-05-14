@@ -15,6 +15,7 @@ public class Borrow {
     private int bid = -2233;
     private Date op;
     private Date ed;
+    private Date retime;
     private int days =  -2233;
     private int stat = -2233;
     @OneToOne(cascade = CascadeType.ALL)
@@ -69,6 +70,14 @@ public class Borrow {
 
     public void setOp(Date op) {
         this.op = op;
+    }
+
+    public Date getRetime() {
+        return retime;
+    }
+
+    public void setRetime(Date retime) {
+        this.retime = retime;
     }
 
     public Date getEd() {
