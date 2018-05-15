@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的图书馆</title>
+    <script type="text/javascript" src="lib/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/layui/css/layui.css">
+    <script type="text/javascript" src="lib/layui/layui.js"></script>
+</head>
+<body>
+<div class="">
+    <div class="col-lg-2" style="margin-top: 120px;">
+        <div class="list-group">
+            <a href="#" id="usermsg" class="list-group-item">用户信息</a>
+            <a href="#" id="ub" class="list-group-item">借阅情况</a>
+            <a href="#" class="list-group-item">借阅统计</a>
+            <!--<a href="#" class="list-group-item">Porta ac consectetur ac</a>-->
+            <!--<a href="#" class="list-group-item">Vestibulum at eros</a>-->
+        </div>
+    </div>
+    <div class="col-lg-9" id="contentu" style="padding-top: 0;margin-top: 0;padding-bottom: 0;margin-bottom: 0;">
+
+    </div>
+</div>
+
+</body>
+</html>
+<script type="text/javascript">
+    $(".list-group-item").click(function () {
+        $(".list-group-item.active").removeClass("active");
+        $(this).addClass("active");
+        $("#contentu").load($(this).attr("id") + ".html");
+    })
+</script>

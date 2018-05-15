@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>借阅情况</title>
-    <script type="text/javascript" src="lib/js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="lib/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
-    <link rel="stylesheet" href="lib/layui/css/layui.css">
-    <script type="text/javascript" src="lib/layui/layui.js"></script>
+    <!--<script type="text/javascript" src="lib/js/jquery-3.2.1.min.js"></script>-->
+    <!--<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>-->
+    <!--<link rel="stylesheet" href="lib/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="lib/layui/css/layui.css">-->
+    <!--<script type="text/javascript" src="lib/layui/layui.js"></script>-->
+    <script type="text/javascript" src="lib/js/js.cookie.min.js"></script>
+
 </head>
 <body>
-<div class="container">
+<div class="" style="padding-top: 0;margin-top: 0;padding-bottom: 0;margin-bottom: 0;">
     <table class="layui-table" id="bookfxt" lay-filter="bookfxt">
         <span style="color: #ff0000;"></span>
     </table>
@@ -20,14 +22,17 @@
 <script type="application/javascript">
     layui.use(["table"], function () {
         var table = layui.table
-        userid = 1;
+        // userid = 1;
+        var cu = Cookies.get("user");
+        var uu = JSON.parse(cu);
         table.render({
             elem: '#bookfxt',
             url: '/libms/borrow/list',
             method: "post",
             page: true,
+            height: 'full-50',
             where: {
-                uid: userid
+                uid: uu.id
             },
             cols: [[
                 {
