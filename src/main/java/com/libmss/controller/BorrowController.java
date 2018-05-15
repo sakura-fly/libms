@@ -35,11 +35,10 @@ public class BorrowController {
 
     @RequestMapping(value = "/return", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseModel<Borrow> returnBook(int id, Integer bid) {
+    public ResponseModel<Borrow> returnBook(int id) {
         Borrow borrow = new Borrow();
         borrow.setId(id);
-        // borrow.setBid(bid);
-        borrow.setStat(1);
+        borrow.setStat(3);
         borrow.setRetime(new Date());
         return borrowService.update(borrow);
     }
