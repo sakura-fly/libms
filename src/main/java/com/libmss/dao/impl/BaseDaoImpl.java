@@ -20,6 +20,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
     protected Session session;
     protected StringBuffer selectSql = new StringBuffer();
     protected StringBuffer countSql = new StringBuffer();
+    protected StringBuffer updateSql = new StringBuffer();
     protected SessionFactory sessionFactory;
 
 
@@ -54,13 +55,15 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
         try {
-            session.update(t);
+            String s = SqlUtil.sqlUpdateSet(t);
+            SQLQuery sql = session.createSQLQuery(updateSql + s);
+            sql = SqlUtil.createSqlIs(t,sql);
+            // session.update(t);
+            sql.executeUpdate();
             tx.commit();
             session.close();
             stat = 1;
         } catch (Exception e) {
-            session.update(t);
-            tx.commit();
             e.printStackTrace();
         }
         return stat;
@@ -75,7 +78,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         Transaction tx = session.beginTransaction();
         try {
             String s = SqlUtil.sqlFindLike(t);
-
+            System.out.println("============================" + selectSql.toString() +s);
             SQLQuery sql = session.createSQLQuery(selectSql.toString() +s);
 
             sql.addEntity(t.getClass());

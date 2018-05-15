@@ -28,6 +28,7 @@ public class BorrowServiceImpl extends BaseServiceImpl<Borrow> implements Borrow
         calendar.add(Calendar.DATE, borrow.getDays());
         borrow.setOp(new Date());
         borrow.setEd(calendar.getTime());
+        borrow.setStat(1);
         int stat = dao.add(borrow);
         ResponseModel<Borrow> rm = new ResponseModel<>();
         rm.setCode(stat);

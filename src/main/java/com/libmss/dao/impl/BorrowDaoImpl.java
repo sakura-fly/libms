@@ -18,6 +18,7 @@ public class BorrowDaoImpl extends BaseDaoImpl<Borrow> implements BorrowDao {
         super(sessionFactory);
         selectSql.append("select w.*,b.* from borrow w, book b where b.id = w.bid");
         countSql.append("select count(*) from borrow where 1=1");
+        updateSql.append("update borrow set ");
     }
 
     @Override
@@ -27,7 +28,7 @@ public class BorrowDaoImpl extends BaseDaoImpl<Borrow> implements BorrowDao {
         Transaction tx = session.beginTransaction();
         try {
             String s = SqlUtil.sqlFindIs(borrow);
-
+            System.out.println("===========" + selectSql.toString() +s);
             SQLQuery sql = session.createSQLQuery(selectSql.toString() +s);
 
             sql.addEntity(borrow.getClass());

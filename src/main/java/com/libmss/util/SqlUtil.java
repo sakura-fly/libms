@@ -73,20 +73,27 @@ public class SqlUtil {
             try {
                 Object val = f.get(t);
                 String type = f.getType().toString();
-                if (type.endsWith("int") || type.endsWith("Integer") || type.endsWith("double") || type.endsWith("Double") || type.endsWith("float") || type.endsWith("Float")) {
-                    if (((Number) val).intValue() != -2233) {
-                        s.append(" , ").append(name).append(" = :").append(name);
-                    }
-                } else {
-                    if (val != null && !val.toString().isEmpty()) {
-                        s.append(" , ").append(name).append(" = :").append(name);
+                if (!"id".equals(name)){
+                    if (type.endsWith("int") || type.endsWith("Integer") || type.endsWith("double") || type.endsWith("Double") || type.endsWith("float") || type.endsWith("Float")) {
+                        if (((Number) val).intValue() != -2233) {
+                            s.append(" , ").append(name).append("=:").append(name);
+                        }
+                    } else {
+                        if (val != null && !val.toString().isEmpty()) {
+                            s.append(" , ").append(name).append("=:").append(name);
+                        }
                     }
                 }
+
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
 
         }
+
+        s.delete(0,2);
+        s.append(" where id=:id");
+        System.out.println(s);
         return s.toString();
     }
 

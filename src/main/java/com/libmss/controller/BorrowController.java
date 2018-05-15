@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping("/borrow")
 public class BorrowController {
@@ -29,6 +31,16 @@ public class BorrowController {
     @ResponseBody
     public ResponseModel<Borrow> list(PageModel pageModel, Borrow borrow) {
         return borrowService.list(pageModel, borrow);
+    }
+
+    @RequestMapping(value = "/return", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseModel<Borrow> returnBook(int id, Integer bid) {
+        Borrow borrow = new Borrow();
+        borrow.setId(id);
+        borrow.setBid(bid);
+        borrow.setRetime(new Date());
+        return borrowService.update(borrow);
     }
 
 
