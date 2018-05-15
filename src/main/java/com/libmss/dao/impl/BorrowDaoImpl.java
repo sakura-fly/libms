@@ -28,9 +28,7 @@ public class BorrowDaoImpl extends BaseDaoImpl<Borrow> implements BorrowDao {
         Transaction tx = session.beginTransaction();
         try {
             String s = SqlUtil.sqlFindIs(borrow);
-            System.out.println("===========" + selectSql.toString() +s);
             SQLQuery sql = session.createSQLQuery(selectSql.toString() +s);
-
             sql.addEntity(borrow.getClass());
             sql = SqlUtil.createSqlIs(borrow,sql);
             res = sql.list();

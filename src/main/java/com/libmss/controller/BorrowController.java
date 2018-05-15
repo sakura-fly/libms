@@ -38,7 +38,8 @@ public class BorrowController {
     public ResponseModel<Borrow> returnBook(int id, Integer bid) {
         Borrow borrow = new Borrow();
         borrow.setId(id);
-        borrow.setBid(bid);
+        // borrow.setBid(bid);
+        borrow.setStat(1);
         borrow.setRetime(new Date());
         return borrowService.update(borrow);
     }

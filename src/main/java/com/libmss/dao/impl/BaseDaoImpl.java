@@ -78,9 +78,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         Transaction tx = session.beginTransaction();
         try {
             String s = SqlUtil.sqlFindLike(t);
-            System.out.println("============================" + selectSql.toString() +s);
             SQLQuery sql = session.createSQLQuery(selectSql.toString() +s);
-
             sql.addEntity(t.getClass());
             sql = SqlUtil.createSqlLike(t,sql);
             res = sql.list();
