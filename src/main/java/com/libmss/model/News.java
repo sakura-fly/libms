@@ -11,20 +11,30 @@ public class News {
     private int id;
     private String title;
     private String content;
-    private Date op;
-    private Date ed;
+    // private Date op;
+    // private Date ed;
     private Date time;
-
+    private int uid;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "uid",insertable = false,updatable=false)
+    private User user;
     public News() {
     }
 
-    public News(int id, String title, String content, Date op, Date ed, Date time) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.op = op;
-        this.ed = ed;
-        this.time = time;
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getId() {
@@ -51,21 +61,6 @@ public class News {
         this.content = content;
     }
 
-    public Date getOp() {
-        return op;
-    }
-
-    public void setOp(Date op) {
-        this.op = op;
-    }
-
-    public Date getEd() {
-        return ed;
-    }
-
-    public void setEd(Date ed) {
-        this.ed = ed;
-    }
 
     public Date getTime() {
         return time;
@@ -81,8 +76,6 @@ public class News {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", op=" + op +
-                ", ed=" + ed +
                 '}';
     }
 }

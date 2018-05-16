@@ -1,18 +1,15 @@
 package com.libmss.service.impl;
 
-import com.libmss.dao.BaseDao;
-import com.libmss.dao.BookDao;
 import com.libmss.dao.UserDao;
-import com.libmss.model.Book;
 import com.libmss.model.PageModel;
 import com.libmss.model.ResponseModel;
 import com.libmss.model.User;
-import com.libmss.service.BaseService;
 import com.libmss.service.UserService;
 import com.libmss.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Component
@@ -33,7 +30,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     @Override
-    public ResponseModel<User> login(User user) {
+    public ResponseModel<User> login(User user, HttpSession session) {
         user.setPwd(MD5.md5(user.getPwd()));
 
         ResponseModel<User> rm = new ResponseModel<User>();
@@ -46,6 +43,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
             rm.setCode(1);
             User rr = r.get(0);
             rr.setPwd("");
+            session.setAttribute("user",rr);
             rm.setModel(rr);
         }
         return rm;

@@ -88,10 +88,6 @@ public class AnalyzeDaoimpl implements AnalyzeDao {
             for (int i = 0; i < r.size(); i++){
                 Object[] l = (Object[]) r.get(i);
                 res.add(new Analyze((String)l[1],Integer.valueOf(String.valueOf(l[0]))));
-
-                // for (int j = 0; j < l.length; j++) {
-                //     System.out.println(l[j]);
-                // }
             }
         } catch (Exception e){
             e.printStackTrace();

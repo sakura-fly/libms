@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 @Controller
@@ -26,9 +27,9 @@ public class LrController {
 
     @RequestMapping(value = "/sigin", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseModel sigin(User user){
+    public ResponseModel sigin(User user, HttpSession session){
         // user.setCtime(new Date());
-       return  userService.login(user);
+       return  userService.login(user, session);
     }
 
 

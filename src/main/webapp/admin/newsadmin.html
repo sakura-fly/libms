@@ -3,16 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>新闻列表</title>
-    <!--<script type="text/javascript" src="lib/js/jquery-3.2.1.min.js"></script>-->
-    <!--<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>-->
-    <!--<link rel="stylesheet" href="lib/css/bootstrap.min.css">-->
-    <!--<link rel="stylesheet" href="lib/layui/css/layui.css">-->
-    <!--<link rel="stylesheet" href="app/css/tablegroup.css">-->
-    <!--<script type="text/javascript" src="lib/js/jquery.data2excel.js"></script>-->
-    <!--<script type="text/javascript" src="lib/layui/layui.js"></script>-->
+    <script type="text/javascript" src="/libms/lib/js/js.cookie.min.js"></script>
+
 </head>
 <body>
     <div class="container">
+        <div style="margin-top: 44px;">
+            <button class="btn btn-success" id="addnews"><span class="glyphicon glyphicon-plus"></span>添加</button>
+        </div>
         <table class="layui-table" id="newstable" lay-filter="newstable">
 
     </div>
@@ -21,13 +19,15 @@
 </body>
 </html>
 <script type="text/javascript">
+    var cu = Cookies.get("user");
+    var user = JSON.parse(cu);
     layui.use(['form', 'layedit', 'laydate','table'], function(){
         var tableData;
 
         var table = layui.table;
         table.render({
             elem: '#newstable',
-            url:'/libms/newstable.json',
+            url:'/libms/news/list',
             page:true,
             cols: [[
                 {field:'title',  title: '标题'},
@@ -44,6 +44,52 @@
 
 
         });
+        $("#addnews").click(function () {
+            tc("/libms/news/add");
+        });
+
+        function tc(url) {
+            layer.open({
+                type: 1,
+                content: $('#newsmsg'),
+                btn: ['确定', '取消'],
+                method:"post",
+                btn1: function () {
+                    var ac = false;
+                    var d = $(".newsinput");
+                    var data = rDate(d);
+                    data.uid=user.id;
+                    console.log(data);
+                    $.ajax({
+                        url: url,
+                        type: 'post',
+                        dataType: 'json',
+                        data: data,
+                        async: false
+                    }).done(function (e) {
+                        if (e.code == 1) {
+                            ac = true;
+                            table.reload("bktb")
+                        } else {
+                            alert(e.msg)
+                        }
+                        console.log("success");
+                    })
+                        .fail(function () {
+                            alert("操作失败")
+                        })
+                        .always(function () {
+                            console.log("complete");
+                        });
+                    return true;
+                },
+                end: function () {
+                    $(".bookinput").val("");
+                    $("*[name='id']").val("1")
+                }
+
+            });
+        }
         table.on('tool(newstable)', function(obj){
             var data = obj.data;
             if(obj.event === 'detail'){

@@ -11,7 +11,6 @@ public class Borrow {
     private int id = -2233;
     private int uid = -2233;
     private int type = -2233;
-    // @Column(insertable = false,updatable=false,nullable = false)
     private int bid = -2233;
     private Date op;
     private Date ed;
