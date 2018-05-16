@@ -14,7 +14,7 @@ public class NewsDaoImpl extends BaseDaoImpl<News> implements NewsDao {
 
     public NewsDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
-        selectSql.append("select * from news where 1=1");
+        selectSql.append(" select * from news b, user_tb u where u.id=b.uid");
         countSql.append("select count(*) from news where 1=1");
     }
 }

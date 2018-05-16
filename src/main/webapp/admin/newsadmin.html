@@ -7,13 +7,13 @@
 
 </head>
 <body>
-    <div class="container">
-        <div style="margin-top: 44px;">
-            <button class="btn btn-success" id="addnews"><span class="glyphicon glyphicon-plus"></span>添加</button>
-        </div>
-        <table class="layui-table" id="newstable" lay-filter="newstable">
-
+<div class="container">
+    <div style="margin-top: 44px;">
+        <button class="btn btn-success" id="addnews"><span class="glyphicon glyphicon-plus"></span>添加</button>
     </div>
+    <table class="layui-table" id="newstable" lay-filter="newstable">
+
+</div>
 
 </table>
 </body>
@@ -21,25 +21,35 @@
 <script type="text/javascript">
     var cu = Cookies.get("user");
     var user = JSON.parse(cu);
-    layui.use(['form', 'layedit', 'laydate','table'], function(){
+    layui.use(['form', 'layedit', 'laydate', 'table'], function () {
         var tableData;
 
         var table = layui.table;
         table.render({
             elem: '#newstable',
-            url:'/libms/news/list',
-            method:"post",
-            page:true,
+            url: '/libms/news/list',
+            method: "post",
+            page: true,
             cols: [[
-                {field:'title',  title: '标题'},
-                {field:'content',  title: '内容', },
-                {field:'time',  title: '时间', },
-                {field:'auth',  title: '发布者', },
-                {fixed: 'right', width:200, align:'center', toolbar: '#barDemo',  title: '操作'}
+                {field: 'title', title: '标题'},
+                {field: 'content', title: '内容',},
+                {
+                    field: 'time', title: '时间', templet: function (d) {
+                        var time = new Date(d.time);
+                        return time.getFullYear() + "年" + (time.getMonth() + 1) + "月" + time.getDate() + "日 " + time.getHours() + "点" + time.getMinutes() + "分" + time.getSeconds() + "秒";
+                    }
+                },
+                {
+                    field: 'user.name', title: '发布者', templet: function (d) {
+                        return d.user.name;
+
+                    }
+                },
+                {fixed: 'right', width: 200, align: 'center', toolbar: '#barDemo', title: '操作'}
 
             ]],
 
-            done: function(res, curr, count){
+            done: function (res, curr, count) {
                 tableData = res;
             }
 
@@ -54,12 +64,12 @@
                 type: 1,
                 content: $('#newsmsg'),
                 btn: ['确定', '取消'],
-                method:"post",
+                method: "post",
                 btn1: function () {
                     var ac = false;
                     var d = $(".newsinput");
                     var data = rDate(d);
-                    data.uid=user.id;
+                    data.uid = user.id;
                     console.log(data);
                     $.ajax({
                         url: url,
@@ -93,17 +103,18 @@
 
             });
         }
-        table.on('tool(newstable)', function(obj){
+
+        table.on('tool(newstable)', function (obj) {
             var data = obj.data;
-            if(obj.event === 'detail'){
-                layer.msg('ID：'+ data.id + ' 的查看操作');
-            } else if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(index){
+            if (obj.event === 'detail') {
+                layer.msg('ID：' + data.id + ' 的查看操作');
+            } else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
                     obj.del();
                     layer.close(index);
                 });
-            } else if(obj.event === 'edit'){
-                layer.alert('编辑行：<br>'+ JSON.stringify(data))
+            } else if (obj.event === 'edit') {
+                layer.alert('编辑行：<br>' + JSON.stringify(data))
             }
         });
     });
