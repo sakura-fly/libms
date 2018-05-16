@@ -8,13 +8,13 @@ import java.util.Date;
 public class News {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    private int id = -2233;
     private String title;
     private String content;
     // private Date op;
     // private Date ed;
     private Date time;
-    private int uid;
+    private int uid = -2233;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "uid",insertable = false,updatable=false)
     private User user;

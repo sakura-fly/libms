@@ -28,6 +28,7 @@
         table.render({
             elem: '#newstable',
             url:'/libms/news/list',
+            method:"post",
             page:true,
             cols: [[
                 {field:'title',  title: '标题'},
@@ -69,7 +70,9 @@
                     }).done(function (e) {
                         if (e.code == 1) {
                             ac = true;
-                            table.reload("bktb")
+                            table.reload("newstable")
+                            layer.closeAll();
+
                         } else {
                             alert(e.msg)
                         }
