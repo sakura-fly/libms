@@ -15,5 +15,6 @@ public class BookDaoImpl extends BaseDaoImpl<Book> implements BookDao {
         super(sessionFactory);
         selectSql.append("select * from book where 1=1");
         countSql.append("select count(*) from book where 1=1");
+        updateSql.append("update book set ");
     }
 }

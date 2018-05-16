@@ -13,7 +13,7 @@ public class Index {
 
     @RequestMapping("/")
     public String index(){
-        return "redirect:admin/adminconsole.html";
+        return "redirect:content/index.html";
     }
 
 

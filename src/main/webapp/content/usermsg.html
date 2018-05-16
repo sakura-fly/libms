@@ -8,22 +8,26 @@
     <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
     <link rel="stylesheet" href="../lib/layui/css/layui.css">
     <script type="text/javascript" src="../lib/layui/layui.js"></script>
+    <script type="text/javascript" src="../lib/js/js.cookie.min.js"></script>
+
 </head>
 <body>
 <div class="" style="margin-top: 23px;padding-top: 60px;padding-bottom: 123px;" align="center">
+    <input type="tel" name="id" id="id" value="" class="umsg" hidden>
+
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label" style="padding-left: 0;">手机号</label>
+            <label class="layui-form-label " style="padding-left: 0;">手机号</label>
             <div class="layui-input-inline">
-                <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input" value="18812345678">
+                <input type="tel" name="phone" id="phone" class="layui-input umsg" value="">
             </div>
         </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label" style="padding-left: 0;">用户名</label>
+            <label class="layui-form-label " style="padding-left: 0;">用户名</label>
             <div class="layui-input-inline">
-                <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input" value="花开花舞花满天">
+                <input type="text" id="uname" name="uname" class="layui-input umsg" value="">
             </div>
         </div>
     </div>
@@ -33,7 +37,7 @@
         <div class="layui-inline">
             <label class="layui-form-label" style="padding-left: 0;">姓名</label>
             <div class="layui-input-inline">
-                <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input" value="梅长苏">
+                <input type="text" id="name" name="name" class="layui-input umsg" value="">
             </div>
         </div>
     </div>
@@ -41,7 +45,7 @@
         <div class="layui-inline">
             <label class="layui-form-label" style="padding-left: 0;"></label>
             <div class="layui-input-inline">
-                <button class="layui-btn layui-btn-normal">提交</button>
+                <button class="layui-btn layui-btn-normal" id="update">提交</button>
 
             </div>
         </div>
@@ -50,9 +54,46 @@
 </div>
 
 
-
-
-
-
 </body>
 </html>
+<script type="text/javascript">
+    var cu = Cookies.get("user");
+    var uu = JSON.parse(cu);
+    $("#phone").val(uu.phone);
+    $("#name").val(uu.name);
+    $("#uname").val(uu.uname);
+    $("#id").val(uu.id);
+    $("#update").click(function () {
+        $.ajax({
+            url: '/libms/user/update',
+            type: 'post',
+            dataType: 'json',
+            data: rDate($(".umsg")),
+        })
+            .done(function (e) {
+                // if (e.code == 1) {
+                    alert(e.msg);
+                // } else {
+                //
+                // }
+                console.log("success");
+            })
+            .fail(function () {
+                console.log("error");
+                alert("修改失败")
+            })
+            .always(function () {
+                console.log("complete");
+            });
+    });
+
+
+    function rDate(obj) {
+        var d = {};
+        for (var i = 0; i < obj.length; i++) {
+            d[$(obj[i]).attr("name")] = $(obj[i]).val();
+        }
+        console.log(d)
+        return d;
+    }
+</script>

@@ -15,5 +15,6 @@ public class PeriodicalDaoImpl extends BaseDaoImpl<Periodical> implements Period
         super(sessionFactory);
         selectSql.append("select * from periodical where 1=1");
         countSql.append("select count(*) from periodical where 1=1");
+        updateSql.append("update periodical set ");
     }
 }

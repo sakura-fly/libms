@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>借阅情况</title>
-    <!--<script type="text/javascript" src="lib/js/jquery-3.2.1.min.js"></script>-->
-    <!--<script type="text/javascript" src="lib/js/bootstrap.min.js"></script>-->
-    <!--<link rel="stylesheet" href="lib/css/bootstrap.min.css">-->
-    <!--<link rel="stylesheet" href="lib/layui/css/layui.css">-->
-    <!--<script type="text/javascript" src="lib/layui/layui.js"></script>-->
+    <!--<script type="text/javascript" src="../lib/js/jquery-3.2.1.min.js"></script>-->
+    <!--<script type="text/javascript" src="../lib/js/bootstrap.min.js"></script>-->
+    <!--<link rel="stylesheet" href="../lib/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" href="../lib/layui/css/layui.css">-->
+    <!--<script type="text/javascript" src="../libms/lib/layui/layui.js"></script>-->
     <script type="text/javascript" src="../lib/js/js.cookie.min.js"></script>
 
 </head>
@@ -20,6 +20,9 @@
 </body>
 </html>
 <script type="application/javascript">
+    layui.config({
+        dir: '/libms/lib/layui/' //layui.js 所在路径（注意，如果是script单独引入layui.js，无需设定该参数。），一般情况下可以无视
+    });
     layui.use(["table"], function () {
         var table = layui.table
         // userid = 1;
@@ -82,7 +85,7 @@
                         return res;
                     }
                 },
-                {fixed: 'right', width: 200, align: 'center', toolbar: '#barDemo', title: '操作'}
+                {fixed: 'right', width: "200", align: 'center', toolbar: '#barDemo', title: '操作'}
                 // {field: 'num', title: '借阅次数'}
             ]],
             done: function (res, curr, count) {

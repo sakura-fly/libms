@@ -57,6 +57,7 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         try {
             String s = SqlUtil.sqlUpdateSet(t);
             SQLQuery sql = session.createSQLQuery(updateSql + s);
+            System.out.println("sqlStr======" + updateSql + s);
             sql = SqlUtil.createSqlIs(t,sql);
             // session.update(t);
             sql.executeUpdate();
