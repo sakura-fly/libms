@@ -20,7 +20,7 @@
             <label class="layui-form-label" style="width: 90px;">分析类型</label>
             <div class="layui-input-block">
                 <input type="radio" name="type" value="1" title="出版社" lay-filter="switchTest" checked>
-                <input type="radio" name="type" value="2" title="类型" lay-filter="switchTest">
+                <!--<input type="radio" name="type" value="2" title="类型" lay-filter="switchTest">-->
                 <input type="radio" name="type" value="3" title="名称" lay-filter="switchTest">
             </div>
         </div>
@@ -45,6 +45,9 @@
     var titles = [];
     var zbz = [];
     var zbdata = []
+    var tName = [];
+    tName[1] = "publisher";
+    tName[3] = "name";
 
     titles[1] = "出版社";
     titles[2] = "作者";
@@ -57,10 +60,11 @@
         form.render();
         form.on('radio()', function (data) {
             fxtype = data.value;
+            console.log(fxtype)
             etitle = [titles[fxtype], "数量"];
             table.reload("qkfxt", {
                 where: {
-                    type: fxtype
+                    tName: tName[fxtype]
                 },
                 cols: [[
                     {field: 'type', title: etitle[0]},
@@ -80,7 +84,7 @@
                 {field: 'num', title: '借阅次数',},
             ]],
             where: {
-                type: fxtype
+                tName: tName[fxtype]
             },
             done: function (res, curr, count) {
                 tableData = res;

@@ -70,7 +70,7 @@ public class ResponseModel<T> {
                 ", msg='" + msg + '\'' +
                 ", model=" + model +
                 ", data=" + data +
-                ", count=" + count +
+                ", statistics=" + count +
                 '}';
     }
 }

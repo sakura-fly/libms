@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public interface AnalyzeDao<T> {
+public interface AnalyzeDao {
 
-    public List<Analyze> borrowNum(int type, T t);
+    public List<Analyze> borrowNum(String tName, int uid);
 
 }

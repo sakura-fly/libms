@@ -10,18 +10,19 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class AnalyzeServiceImpl<T> implements AnalyzeService<T> {
+public class AnalyzeServiceImpl implements AnalyzeService {
 
-    private AnalyzeDao<T> analyzeDao;
+    private AnalyzeDao analyzeDao;
 
-    public AnalyzeServiceImpl(AnalyzeDao<T> analyzeDao) {
+    public AnalyzeServiceImpl(AnalyzeDao analyzeDao) {
         this.analyzeDao = analyzeDao;
     }
 
+
     @Override
-    public ResponseModel<Analyze> borrowNum(int type,T t) {
+    public ResponseModel<Analyze> borrowNum(String tName, int uid) {
         ResponseModel<Analyze> r = new ResponseModel<>();
-        List<Analyze> l = analyzeDao.borrowNum(type, t);
+        List<Analyze> l = analyzeDao.borrowNum(tName, uid);
         r.setData(l);
         r.setMsg(l == null || l.isEmpty() ? StringValue.LIST_FAILD : "");
         r.setCode(l == null || l.isEmpty() ? -1 : 0);

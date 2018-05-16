@@ -3,6 +3,15 @@ package com.libmss.model;
 public class BookAnalyze {
     private String type;
     private long num = -2233;
+    private String tname;
+
+    public String getTname() {
+        return tname;
+    }
+
+    public void setTname(String tname) {
+        this.tname = tname;
+    }
 
     public BookAnalyze(String type, long num) {
         this.type = type;

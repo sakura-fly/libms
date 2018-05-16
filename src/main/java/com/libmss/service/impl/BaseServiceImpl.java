@@ -40,7 +40,7 @@ public abstract class BaseServiceImpl<T> implements BaseService<T> {
     public ResponseModel<T> list(PageModel page, T t) {
         ResponseModel<T> rm = new ResponseModel<T>();
         List<T> list = dao.list(page, t);
-//        System.out.print(dao.count(t));
+//        System.out.print(dao.statistics(t));
         rm.setMsg(list == null || list.isEmpty() ? StringValue.LIST_FAILD : "");
         rm.setCode(list == null || list.isEmpty() ? -1 : 0);
         rm.setData(list);

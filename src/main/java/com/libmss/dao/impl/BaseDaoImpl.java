@@ -99,23 +99,13 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         try {
             String s = SqlUtil.sqlFindLike(t);
             SQLQuery sql = session.createSQLQuery(countSql.toString() + s);
-//            sql.addEntity(t.getClass());
             sql = SqlUtil.createSqlLike(t,sql);
-//             count  = (long)sql.iterate().next();
-//            count = sql.executeUpdate();
             count = ((Number) sql.list().get(0)).longValue();
-
-//            String hql = "select count(*) from User as user";
-//            Long count = (Long)getHibernateTemplate().find(hql).listIterator().next();
-
-
         }catch (Exception e){
             e.printStackTrace();
         }
         tx.commit();
         session.close();
-
         return count;
-
     }
 }
