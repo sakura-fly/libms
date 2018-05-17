@@ -151,10 +151,10 @@
         })
             .done(function (e) {
                 var data = e.data;
-                var nList = " <li><a href=\"#\" target=\"_blank\"><h1>近日图书馆新进一批热门书籍</h1><span>2017-6-18</span></a></li>";
+                var nList = "";
                 for (var i = 0; i < data.length; i++) {
-                    var ctime = new Date(data.time)
-                    var t =  ctime.getFullYear() + "年" + (ctime.getMonth() + 1) + "月" + ctime.getDate() + "日 ";
+                    var ctime = new Date(data[i].time)
+                    var t =  ctime.getFullYear() + "-" + (ctime.getMonth() + 1) + "-" + ctime.getDate();
                     nList += "<li><a href=\"#\" target=\"_blank\"><h1>" + data[i].title +  "</h1><span>" + t + "</span></a></li>";
                 }
                 $("#nl").html(nList);
