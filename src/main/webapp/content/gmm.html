@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改密码</title>
+</head>
+<body>
+<div class="container" align="center" style="margin-top: 100px; " >
+    <div class="" style="width: 300px;">
+        <input class="form-control" type="password" id="oldpwd" placeholder="请输入原密码"><br>
+        <input class="form-control" type="password" id="pwd" placeholder="请输入新密码"><br>
+        <input class="form-control" type="password" id="repwd" placeholder="请确认新密码"><br>
+        <button class="btn btn-danger   form-control">确认</button>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    $("button").click(function () {
+        var oldpwd = $("#oldpwd");
+        var pwd = $("#pwd");
+        var repwd = $("#repwd");
+        if (pwd == repwd) {
+
+        } else {
+            alert("两次密码不一致");
+        }
+    });
+</script>
