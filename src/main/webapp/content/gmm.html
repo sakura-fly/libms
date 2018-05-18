@@ -5,22 +5,22 @@
     <title>修改密码</title>
 </head>
 <body>
-<div class="container" align="center" style="margin-top: 100px; " >
+<div class="container" align="center" style="margin-top: 100px; ">
     <div class="" style="width: 300px;">
         <div class="form-group ">
             <!--<label class="control-label" for="inputSuccess1">Input with success</label>-->
-            <input class="form-control mm" type="password" id="oldpwd" placeholder="请输入原密码"><br>
-            <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+            <input class="form-control mm" type="password" id="oldpwd" placeholder="请输入原密码">
+            <span class="help-block"></span>
         </div>
-         <div class="form-group ">
+        <div class="form-group ">
             <!--<label class="control-label" for="inputSuccess1">Input with success</label>-->
-             <input class="form-control mm" type="password" id="pwd" placeholder="请输入新密码"><br>
-            <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+            <input class="form-control mm" type="password" id="pwd" placeholder="请输入新密码">
+            <span class="help-block"></span>
         </div>
-         <div class="form-group ">
+        <div class="form-group ">
             <!--<label class="control-label" for="inputSuccess1">Input with success</label>-->
-             <input class="form-control mm" type="password" id="repwd" placeholder="请确认新密码"><br>
-            <span class="help-block">A block of help text that breaks onto a new line and may extend beyond one line.</span>
+            <input class="form-control mm" type="password" id="repwd" placeholder="请确认新密码">
+            <span class="help-block"></span>
         </div>
 
         <!--<input class="form-control mm" type="password" id="oldpwd" placeholder="请输入原密码"><br>-->
@@ -32,11 +32,16 @@
 </body>
 </html>
 <script type="text/javascript">
+
+    $(".has-error").focus(function () {
+        console.log('ssssssssss')
+    })
     $("button").click(function () {
         $(".mm").each(function () {
             console.log($(this).val());
             if ($(this).val() == null || $(this).val() === "") {
                 $(this).parent().addClass("has-error");
+                $(this).next().html("这一项不能为空")
             }
 
         });
