@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 @Component
 public class BorrowDaoImpl extends BaseDaoImpl<Borrow> implements BorrowDao {
     public BorrowDaoImpl(SessionFactory sessionFactory) {
@@ -29,9 +30,11 @@ public class BorrowDaoImpl extends BaseDaoImpl<Borrow> implements BorrowDao {
         Transaction tx = session.beginTransaction();
         try {
             String s = SqlUtil.sqlFindIs(borrow);
-            SQLQuery sql = session.createSQLQuery(selectSql.toString() +s);
+            SQLQuery sql = session.createSQLQuery(selectSql.toString() + s + " limit :skip , :limit");
             sql.addEntity(borrow.getClass());
-            sql = SqlUtil.createSqlIs(borrow,sql);
+            sql = SqlUtil.createSqlIs(borrow, sql);
+            sql.setParameter("skip",pageModel.getSkip());
+            sql.setParameter("limit",pageModel.getLimit());
             res = sql.list();
         } catch (Exception e) {
             e.printStackTrace();

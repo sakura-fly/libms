@@ -79,9 +79,11 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
         Transaction tx = session.beginTransaction();
         try {
             String s = SqlUtil.sqlFindLike(t);
-            SQLQuery sql = session.createSQLQuery(selectSql.toString() +s);
+            SQLQuery sql = session.createSQLQuery(selectSql.toString() + s + " limit :skip , :limit");
             sql.addEntity(t.getClass());
             sql = SqlUtil.createSqlLike(t,sql);
+            sql.setParameter("skip",pageModel.getSkip());
+            sql.setParameter("limit",pageModel.getLimit());
             res = sql.list();
         } catch (Exception e) {
             e.printStackTrace();
